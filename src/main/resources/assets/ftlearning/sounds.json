@@ -1,0 +1,156 @@
+{
+    "item.prospector.use.success" : {
+        "sounds" : [
+            "ftlearning:item/prospector/use/success"
+        ],
+        "subtitle" : "subtitles.ftlearning.item.prospector.use.success"
+    },
+    "item.prospector.use.failure" : {
+        "sounds" : [
+            "ftlearning:item/prospector/use/failure"
+        ],
+        "subtitle" : "subtitles.ftlearning.item.prospector.use.failure"
+    },
+
+    "block.shuodedaoli_block.break" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break1",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break2",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break3",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break4",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break5",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break6",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/break7",
+                "pitch" : 1.25
+            }
+        ],
+        "subtitle" : "subtitles.block.generic.break"
+    },
+    "block.shuodedaoli_block.fall" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/fall1",
+                "volume" : 2,
+                "pitch" : 1.33
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/fall2",
+                "volume" : 2,
+                "pitch" : 1.33
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/fall3",
+                "volume" : 2,
+                "pitch" : 1.33
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/fall4",
+                "volume" : 2,
+                "pitch" : 1.33
+            }
+        ],
+        "subtitle" : "subtitles.block.generic.fall"
+    },
+    "block.shuodedaoli_block.hit" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/hit1",
+                "volume" : 7,
+                "pitch" : 2
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/hit2",
+                "volume" : 7,
+                "pitch" : 2
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/hit3",
+                "volume" : 7,
+                "pitch" : 2
+            }
+        ],
+        "subtitle" : "subtitles.block.generic.hit"
+    },
+    "block.shuodedaoli_block.place" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/place1",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/place2",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/place3",
+                "pitch" : 1.25
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/place4",
+                "pitch" : 1.25
+            }
+        ],
+        "subtitle" : "subtitles.block.generic.place"
+    },
+    "block.shuodedaoli_block.step" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step1",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step2",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step3",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step4",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step5",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step6",
+                "volume" : 6.67
+            },
+            {
+                "name" : "ftlearning:block/shuodedaoli_block/step7",
+                "volume" : 6.67
+            }
+        ],
+        "subtitle" : "subtitles.block.generic.footsteps"
+    },
+
+    "music_disc.igotsmoke" : {
+        "sounds" : [
+            {
+                "name" : "ftlearning:records/igotsmoke",
+                "stream" : true
+            }
+        ]
+    }
+}
