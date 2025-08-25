@@ -1,10 +1,13 @@
 package com.feiteng.ftlearning.item;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.item.custom.ARGlassesItem;
+import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.EquipmentSlot;
 //import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 //import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -105,6 +108,20 @@ public class ModItems {
         "music_disc_igotsmoke",
         new MusicDiscItem(1, ModSoundEvents.MUSIC_DISC_IGOTSMOKE,
             new FabricItemSettings().maxCount(1).rarity(Rarity.RARE), 246)
+    );
+
+    public static final Item ADVANCED_PROSPECTOR = register(
+        "advanced_prospector",
+        new AdvancedProspectorItem(new FabricItemSettings()
+            .maxDamage(64)
+            .recipeRemainder(DISC_FRAGMENT_GENERAL))
+    );
+
+    public static final Item AR_GLASSES = register(
+        "ar_glasses",
+        new ARGlassesItem(new FabricItemSettings()
+            .maxDamage(1024)
+            .equipmentSlot(stack -> EquipmentSlot.HEAD))
     );
 
     private static Item register(String name, Item item) {

@@ -74,8 +74,10 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator generator) {
         generator.register(ModItems.FIRST_ITEM, Models.GENERATED);
         generator.register(ModItems.PROSPECTOR, Models.GENERATED);
-        generator.register(ModItems.NIGHT_VISION_GOLDEN_CARROT, Models.GENERATED);
+        generator.register(ModItems.ADVANCED_PROSPECTOR, Models.GENERATED);
+        generator.register(ModItems.AR_GLASSES, Models.GENERATED);
         generator.register(ModItems.INDUCTIVE_PREAMPLIFIER, Models.GENERATED);
+        generator.register(ModItems.NIGHT_VISION_GOLDEN_CARROT, Models.GENERATED);
 
         generator.register(ModItems.VOIDABYSS_STONE_SWORD, Models.HANDHELD);
         generator.register(ModItems.VOIDABYSS_STONE_AXE, Models.HANDHELD);

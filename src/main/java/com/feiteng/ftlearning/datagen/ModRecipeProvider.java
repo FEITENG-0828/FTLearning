@@ -31,16 +31,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void generate(RecipeExporter exporter) {
-        offerReversibleCompactingRecipes(exporter,
-            RecipeCategory.MISC, ModItems.FIRST_ITEM,
-            RecipeCategory.BUILDING_BLOCKS, ModBlocks.FIRST_ITEM_BLOCK,
-            getModRecipeName(ModBlocks.FIRST_ITEM_BLOCK, "from",
-                ModItems.FIRST_ITEM, null),
-            HelpfulFuncs.getSimpleIdStr(ModBlocks.FIRST_ITEM_BLOCK),
-            getModRecipeName(ModItems.FIRST_ITEM, "from",
-                ModBlocks.FIRST_ITEM_BLOCK, null),
-            HelpfulFuncs.getSimpleIdStr(ModItems.FIRST_ITEM));
-
         CookingRecipeJsonBuilder.create(Ingredient.ofItems(Items.ROTTEN_FLESH),
                 RecipeCategory.MISC, Items.LEATHER,
                 0.2f, 200,
@@ -62,24 +52,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .criterion(hasItem(Items.LAPIS_LAZULI), conditionsFromItem(Items.LAPIS_LAZULI))
             .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.INDUCTIVE_PREAMPLIFIER, 1)
-            .input('C', Items.COPPER_INGOT)
-            .input('R', Items.REDSTONE)
-            .input('S', Items.STICK)
-            .pattern("CRC")
-            .pattern("CSC")
-            .pattern("CRC")
-            .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
-            .offerTo(exporter);
-
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NIGHT_VISION_GOLDEN_CARROT, 3)
-            .input('G', Items.GOLDEN_CARROT)
-            .input('F', ModItems.FIRST_ITEM)
-            .pattern("GGG")
-            .pattern("GFG")
-            .pattern("GGG")
-            .criterion(hasItem(Items.GOLDEN_CARROT), conditionsFromItem(Items.GOLDEN_CARROT))
-            .offerTo(exporter);
+        offerReversibleCompactingRecipes(exporter,
+            RecipeCategory.MISC, ModItems.FIRST_ITEM,
+            RecipeCategory.BUILDING_BLOCKS, ModBlocks.FIRST_ITEM_BLOCK,
+            getModRecipeName(ModBlocks.FIRST_ITEM_BLOCK, "from",
+                ModItems.FIRST_ITEM, null),
+            HelpfulFuncs.getSimpleIdStr(ModBlocks.FIRST_ITEM_BLOCK),
+            getModRecipeName(ModItems.FIRST_ITEM, "from",
+                ModBlocks.FIRST_ITEM_BLOCK, null),
+            HelpfulFuncs.getSimpleIdStr(ModItems.FIRST_ITEM));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, Items.POISONOUS_POTATO, 1)
             .input('S', Items.SPIDER_EYE)
@@ -99,6 +80,28 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .criterion(hasItem(ModItems.FIRST_ITEM), conditionsFromItem(ModItems.FIRST_ITEM))
             .offerTo(exporter);
 
+        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.ADVANCED_PROSPECTOR, 1)
+            .input('F', ModBlocks.FIRST_ITEM_BLOCK)
+            .input('L', Items.LIGHTNING_ROD)
+            .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
+            .pattern("L L")
+            .pattern("FIF")
+            .pattern("FIF")
+            .criterion(hasItem(ModItems.INDUCTIVE_PREAMPLIFIER),
+                conditionsFromItem(ModItems.INDUCTIVE_PREAMPLIFIER))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.AR_GLASSES, 1)
+            .input('I', Items.IRON_INGOT)
+            .input('G', Items.GLASS_PANE)
+            .input('P', ModItems.INDUCTIVE_PREAMPLIFIER)
+            .pattern("I I")
+            .pattern("III")
+            .pattern("GPG")
+            .criterion(hasItem(ModItems.INDUCTIVE_PREAMPLIFIER),
+                conditionsFromItem(ModItems.INDUCTIVE_PREAMPLIFIER))
+            .offerTo(exporter);
+
         ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.THERAPEUTIC_TABLE, 1)
             .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
             .input('F', ModItems.FIRST_ITEM)
@@ -108,6 +111,25 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .pattern("FGF")
             .pattern("OOO")
             .criterion(hasItem(Items.GHAST_TEAR), conditionsFromItem(Items.GHAST_TEAR))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.INDUCTIVE_PREAMPLIFIER, 1)
+            .input('C', Items.COPPER_INGOT)
+            .input('R', Items.REDSTONE)
+            .input('S', Items.STICK)
+            .pattern("CRC")
+            .pattern("CSC")
+            .pattern("CRC")
+            .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NIGHT_VISION_GOLDEN_CARROT, 3)
+            .input('G', Items.GOLDEN_CARROT)
+            .input('F', ModItems.FIRST_ITEM)
+            .pattern("GGG")
+            .pattern("GFG")
+            .pattern("GGG")
+            .criterion(hasItem(Items.GOLDEN_CARROT), conditionsFromItem(Items.GOLDEN_CARROT))
             .offerTo(exporter);
 
         createStairsRecipe(ModBlocks.VOIDABYSS_STONE_STAIRS, Ingredient.ofItems(ModBlocks.VOIDABYSS_STONE))

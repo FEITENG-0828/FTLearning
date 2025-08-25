@@ -3,6 +3,8 @@ package com.feiteng.ftlearning.item.custom;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.tag.ModBlockTags;
+import com.feiteng.ftlearning.util.HelpfulFuncs;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
@@ -10,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -74,16 +75,7 @@ public class ProspectorItem extends Item {
                               List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
         if (!Screen.hasShiftDown()) {
-            tooltip.add(
-                Text.translatable("item.ftlearning.tooltip_mask1")
-                    .formatted(Formatting.AQUA)
-                .append(ScreenTexts.SPACE)
-                .append(Text.literal("SHIFT")
-                    .formatted(Formatting.GOLD, Formatting.UNDERLINE))
-                .append(ScreenTexts.SPACE)
-                .append(Text.translatable("item.ftlearning.tooltip_mask2")
-                    .formatted(Formatting.AQUA))
-            );
+            tooltip.add(HelpfulFuncs.getTooltipMaskText("shift"));
         } else {
             tooltip.add(Text.translatable(
                 ModItems.PROSPECTOR.getTranslationKey() + ".tooltip").formatted(Formatting.GRAY));

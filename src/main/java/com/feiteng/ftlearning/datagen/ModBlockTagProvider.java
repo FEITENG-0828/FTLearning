@@ -23,6 +23,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(ModBlockTags.PROSPECTOR_LIST)
             .forceAddTag(BlockTags.DIAMOND_ORES)
             .add(Blocks.ANCIENT_DEBRIS);
+        getOrCreateTagBuilder(ModBlockTags.ADVANCED_PROSPECTOR_LIST)
+            .forceAddTag(ModBlockTags.PROSPECTOR_LIST);
 
         getOrCreateTagBuilder(ModBlockTags.COMPRESSED_BLOCKS)
             .add(ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS)
@@ -114,5 +116,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTagBuilder(BlockTags.INFINIBURN_OVERWORLD)
             .add(ModBlocks.NETHERRACK_COMPRESSED_BLOCKS);
+
+        getOrCreateTagBuilder(BlockTags.WITHER_SUMMON_BASE_BLOCKS)
+            .add(ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
+        getOrCreateTagBuilder(BlockTags.SOUL_SPEED_BLOCKS)
+            .add(ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
+        getOrCreateTagBuilder(BlockTags.SOUL_FIRE_BASE_BLOCKS)
+            .add(ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
     }
 }

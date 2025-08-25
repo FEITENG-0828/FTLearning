@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.datagen;
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -22,16 +23,35 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL Group : Core");
         builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL Group : Compressed");
 
+        builder.add("item.ftlearning.tooltip_mask1", "Hold ");
+        builder.add("item.ftlearning.tooltip_mask2", " for more information");
+
         builder.add(ModItems.PROSPECTOR, "Prospector");
         builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".tooltip",
-            "Right click on the block to detect precious ores within the upper and lower 64 blocks");
+            "Right click on the block to detect precious ores"
+            + " within the upper and lower 64 blocks");
         builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".use.success",
             "%1$s was found at (%2$s, %3$s, %4$s)");
         builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".use.failure",
             "No Ore Found");
 
-        builder.add(ModItems.INDUCTIVE_PREAMPLIFIER, "Inductive Preamplifier");
+        builder.add(ModItems.ADVANCED_PROSPECTOR, "Advanced Prospector");
+        builder.add(ModItems.ADVANCED_PROSPECTOR.getTranslationKey() + ".tooltip",
+            "Right click to scan precious ores within "
+            + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
+            + '*' + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
+            + " chunks around you");
+        builder.add(ModItems.ADVANCED_PROSPECTOR.getTranslationKey() + ".use.done",
+            "Scan completed");
+
+        builder.add("subtitles.ftlearning.item.prospector.use.success",
+        "Ores detected");
+        builder.add("subtitles.ftlearning.item.prospector.use.failure",
+        "No ore detected");
+
+        builder.add(ModItems.AR_GLASSES, "AR Glasses");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "Therapeutic Table");
+        builder.add(ModItems.INDUCTIVE_PREAMPLIFIER, "Inductive Preamplifier");
 
         builder.add(ModItems.NIGHT_VISION_GOLDEN_CARROT, "Night Vision Golden Carrot");
 
@@ -57,18 +77,12 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.VOIDABYSS_STONE_LEGGINGS, "Voidabyss Stone Leggings");
         builder.add(ModItems.VOIDABYSS_STONE_BOOTS, "Voidabyss Stone Boots");
 
-        builder.add("item.ftlearning.tooltip_mask1", "Hold");
-        builder.add("item.ftlearning.tooltip_mask2", "for more information");
-
-        builder.add("subtitles.ftlearning.item.prospector.use.success", "Ores detected");
-        builder.add("subtitles.ftlearning.item.prospector.use.failure", "No ore detected");
-
         builder.add(ModItems.SHUODEDAOLI, "ShuoDeDaoLi");
         builder.add(ModBlocks.SHUODEDAOLI_BLOCK, "ShuoDeDaoLi Block");
 
         builder.add(ModItems.DISC_FRAGMENT_GENERAL, "Disc Fragment");
         builder.add(ModItems.DISC_FRAGMENT_GENERAL.getTranslationKey() + ".desc",
-            "EMPTY");
+            "Song unstored");
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE, "Music Disc");
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getTranslationKey() + ".desc",
             "Venoflame - I Got Smoke (Explicit Ver.)");
@@ -95,7 +109,9 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
             builder, "Soul Sand", ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
     }
 
-    public static void addCompressedBlockKind(TranslationBuilder builder, String base_name, Block[] blocks) {
+    public static void addCompressedBlockKind(
+        TranslationBuilder builder, String base_name, Block[] blocks
+    ) {
         for (int i = 0; i < blocks.length; ++i) {
             builder.add(blocks[i],
                 HelpfulFuncs.getCompressedBlockName(base_name, i + 1, "en_us"));
