@@ -20,11 +20,9 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapper_lookup) {
-        getOrCreateTagBuilder(ModBlockTags.PROSPECTOR_LIST)
+        getOrCreateTagBuilder(ModBlockTags.PROSPECTING_LIST)
             .forceAddTag(BlockTags.DIAMOND_ORES)
             .add(Blocks.ANCIENT_DEBRIS);
-        getOrCreateTagBuilder(ModBlockTags.ADVANCED_PROSPECTOR_LIST)
-            .forceAddTag(ModBlockTags.PROSPECTOR_LIST);
 
         getOrCreateTagBuilder(ModBlockTags.COMPRESSED_BLOCKS)
             .add(ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS)

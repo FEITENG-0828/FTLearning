@@ -124,6 +124,26 @@ public class ModItems {
             .equipmentSlot(stack -> EquipmentSlot.HEAD))
     );
 
+    public static final Item ELECTRONIC_ESSENCE = register(
+        "electronic_essence",
+        new Item(new FabricItemSettings())
+    );
+
+    public static final Item ELECTRONIC_NUCLEUS_MATRIX = register(
+        "electronic_nucleus_matrix",
+        new Item(new FabricItemSettings())
+    );
+
+    public static final Item INSIGHT_ROD = register(
+        "insight_rod",
+        new Item(new FabricItemSettings())
+    );
+
+    public static final Item CHROMOGENIC_LENS = register(
+        "chromogenic_lens",
+        new Item(new FabricItemSettings())
+    );
+
     private static Item register(String name, Item item) {
         return Registry.register(Registries.ITEM,
             new Identifier(FTLearning.MOD_ID, name),

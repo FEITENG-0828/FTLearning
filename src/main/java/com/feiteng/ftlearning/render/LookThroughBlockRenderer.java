@@ -35,7 +35,7 @@ public class LookThroughBlockRenderer {
                                 matrix_stack,
                                 context.consumers().getBuffer(ModRenderLayer.LOOK_THROUGH_LINES),
                                 pos,
-                                block.getDefaultMapColor().color
+                                AdvancedProspectorItem.getRenderColor(block)
                             );
                         });
                     });

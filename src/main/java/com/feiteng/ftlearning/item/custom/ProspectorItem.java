@@ -67,7 +67,7 @@ public class ProspectorItem extends Item {
     }
 
     private boolean isRightBlock(BlockState state) {
-        return state.isIn(ModBlockTags.PROSPECTOR_LIST);
+        return state.isIn(ModBlockTags.PROSPECTING_LIST);
     }
 
     @Override

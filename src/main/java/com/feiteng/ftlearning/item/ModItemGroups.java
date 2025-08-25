@@ -31,11 +31,18 @@ public class ModItemGroups {
                 .entries((display_context, entries) -> {
                     entries.add(ModItems.FIRST_ITEM);
                     entries.add(ModBlocks.FIRST_ITEM_BLOCK);
+
                     entries.add(ModItems.PROSPECTOR);
                     entries.add(ModItems.ADVANCED_PROSPECTOR);
                     entries.add(ModItems.AR_GLASSES);
                     entries.add(ModBlocks.THERAPEUTIC_TABLE);
+
                     entries.add(ModItems.INDUCTIVE_PREAMPLIFIER);
+                    entries.add(ModItems.ELECTRONIC_ESSENCE);
+                    entries.add(ModItems.ELECTRONIC_NUCLEUS_MATRIX);
+                    entries.add(ModItems.INSIGHT_ROD);
+                    entries.add(ModItems.CHROMOGENIC_LENS);
+
                     entries.add(ModItems.NIGHT_VISION_GOLDEN_CARROT);
 
                     entries.add(ModBlocks.VOIDABYSS_STONE);

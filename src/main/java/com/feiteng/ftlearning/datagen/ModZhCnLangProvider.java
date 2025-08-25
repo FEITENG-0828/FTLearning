@@ -50,7 +50,12 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
 
         builder.add(ModItems.AR_GLASSES, "AR眼镜");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "治疗台");
+
         builder.add(ModItems.INDUCTIVE_PREAMPLIFIER, "感应预放器");
+        builder.add(ModItems.ELECTRONIC_ESSENCE, "电子精粹");
+        builder.add(ModItems.ELECTRONIC_NUCLEUS_MATRIX, "电子精核矩阵");
+        builder.add(ModItems.INSIGHT_ROD, "灵视引");
+        builder.add(ModItems.CHROMOGENIC_LENS, "显色镜片");
 
         builder.add(ModItems.NIGHT_VISION_GOLDEN_CARROT, "夜视金萝卜");
 

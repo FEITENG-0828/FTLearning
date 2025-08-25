@@ -2,7 +2,6 @@ package com.feiteng.ftlearning;
 
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.custom.ARGlassesItem;
-import com.feiteng.ftlearning.render.TestRenderOutlines;
 import com.feiteng.ftlearning.render.LookThroughBlockRenderer;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -44,7 +43,6 @@ public class FTLearningClient implements ClientModInitializer {
             RenderLayer.getCutout(), ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
 
         // ServerLivingEntityEvents.ALLOW_DAMAGE.register(null); // TODO
-        // WorldRenderEvents.LAST.register(TestRenderOutlines::render);
         WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register((context, hit_result) -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player != null &&

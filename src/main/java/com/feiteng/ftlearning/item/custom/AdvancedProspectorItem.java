@@ -12,11 +12,11 @@ import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
-import com.feiteng.ftlearning.tag.ModBlockTags;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,16 +34,30 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 
 public class AdvancedProspectorItem extends Item {
     public static final int SCAN_CHUNK_RADIUS = 1;
-    // public static final Map<Block, Integer> PROSPECT_LIST = new HashMap<>();
+    public static final Map<Block, Integer> PROSPECTING_LIST = Util.make(new HashMap<>(),
+        map -> {
+            map.put(Blocks.DIAMOND_ORE, 0x5CDBD5);
+            map.put(Blocks.DEEPSLATE_DIAMOND_ORE, 0x5CDBD5);
+            map.put(Blocks.ANCIENT_DEBRIS, 0x000000);
+    });
 
     public AdvancedProspectorItem(Settings settings) {
         super(settings);
+    }
+
+    public static int getRenderColor(Block block) {
+        return PROSPECTING_LIST.getOrDefault(block, 0xFFFFFF);
+    }
+
+    public static boolean isRightBlock(BlockState state) {
+        return PROSPECTING_LIST.containsKey(state.getBlock());
     }
 
     @Override
@@ -85,10 +99,6 @@ public class AdvancedProspectorItem extends Item {
             }
         }
         return TypedActionResult.success(item_stack);
-    }
-
-    public static boolean isRightBlock(BlockState state) {
-        return state.isIn(ModBlockTags.ADVANCED_PROSPECTOR_LIST);
     }
 
     @Override
@@ -176,6 +186,6 @@ public class AdvancedProspectorItem extends Item {
         }
     }
 
-    // dimension, per item, render distance, color
+    // render distance, color
 
 }

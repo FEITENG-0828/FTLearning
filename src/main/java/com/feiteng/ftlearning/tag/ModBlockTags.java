@@ -7,8 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class ModBlockTags {
-    public static TagKey<Block> PROSPECTOR_LIST = of("prospector_list");
-    public static TagKey<Block> ADVANCED_PROSPECTOR_LIST = of("advanced_prospector_list");
+    public static TagKey<Block> PROSPECTING_LIST = of("prospecting_list");
     public static TagKey<Block> COMPRESSED_BLOCKS = of("compressed_blocks");
 
     private static TagKey<Block> of(String name) {

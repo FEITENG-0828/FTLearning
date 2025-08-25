@@ -51,7 +51,12 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
 
         builder.add(ModItems.AR_GLASSES, "AR Glasses");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "Therapeutic Table");
+
         builder.add(ModItems.INDUCTIVE_PREAMPLIFIER, "Inductive Preamplifier");
+        builder.add(ModItems.ELECTRONIC_ESSENCE, "Electronic Essence");
+        builder.add(ModItems.ELECTRONIC_NUCLEUS_MATRIX, "Electronic Nucleus Matrix");
+        builder.add(ModItems.INSIGHT_ROD, "Insight Rod");
+        builder.add(ModItems.CHROMOGENIC_LENS, "Chromogenic Lens");
 
         builder.add(ModItems.NIGHT_VISION_GOLDEN_CARROT, "Night Vision Golden Carrot");
 

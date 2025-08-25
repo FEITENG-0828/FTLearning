@@ -71,7 +71,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .criterion(hasItem(Items.POTATO), conditionsFromItem(Items.POTATO))
             .offerTo(exporter, HelpfulFuncs.getModNamespacedSimpleIdStr(Items.POISONOUS_POTATO));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.PROSPECTOR, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.PROSPECTOR, 1)
             .input('F', ModItems.FIRST_ITEM)
             .input('S', Items.STICK)
             .pattern("FF ")
@@ -80,29 +80,31 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .criterion(hasItem(ModItems.FIRST_ITEM), conditionsFromItem(ModItems.FIRST_ITEM))
             .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.ADVANCED_PROSPECTOR, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.ADVANCED_PROSPECTOR, 1)
+            .input('I', ModItems.INSIGHT_ROD)
             .input('F', ModBlocks.FIRST_ITEM_BLOCK)
-            .input('L', Items.LIGHTNING_ROD)
-            .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
-            .pattern("L L")
-            .pattern("FIF")
-            .pattern("FIF")
-            .criterion(hasItem(ModItems.INDUCTIVE_PREAMPLIFIER),
-                conditionsFromItem(ModItems.INDUCTIVE_PREAMPLIFIER))
-            .offerTo(exporter);
-
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModItems.AR_GLASSES, 1)
-            .input('I', Items.IRON_INGOT)
-            .input('G', Items.GLASS_PANE)
-            .input('P', ModItems.INDUCTIVE_PREAMPLIFIER)
+            .input('E', ModItems.ELECTRONIC_NUCLEUS_MATRIX)
+            .input('L', ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS[0])
             .pattern("I I")
-            .pattern("III")
-            .pattern("GPG")
-            .criterion(hasItem(ModItems.INDUCTIVE_PREAMPLIFIER),
-                conditionsFromItem(ModItems.INDUCTIVE_PREAMPLIFIER))
+            .pattern("FEF")
+            .pattern("LFL")
+            .criterion(hasItem(ModItems.ELECTRONIC_NUCLEUS_MATRIX),
+                conditionsFromItem(ModItems.ELECTRONIC_NUCLEUS_MATRIX))
             .offerTo(exporter);
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.REDSTONE, ModBlocks.THERAPEUTIC_TABLE, 1)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ModItems.AR_GLASSES, 1)
+            .input('C', Items.COPPER_INGOT)
+            .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
+            .input('L', ModItems.CHROMOGENIC_LENS)
+            .input('E', ModItems.ELECTRONIC_NUCLEUS_MATRIX)
+            .pattern("C C")
+            .pattern("CIC")
+            .pattern("LEL")
+            .criterion(hasItem(ModItems.ELECTRONIC_NUCLEUS_MATRIX),
+                conditionsFromItem(ModItems.ELECTRONIC_NUCLEUS_MATRIX))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.THERAPEUTIC_TABLE, 1)
             .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
             .input('F', ModItems.FIRST_ITEM)
             .input('G', Items.GHAST_TEAR)
@@ -121,6 +123,53 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .pattern("CSC")
             .pattern("CRC")
             .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ELECTRONIC_ESSENCE, 1)
+            .input('T', Items.TARGET)
+            .input('S', Items.CALIBRATED_SCULK_SENSOR)
+            .input('A', Items.REDSTONE_TORCH)
+            .input('R', Items.REPEATER)
+            .input('Q', Items.QUARTZ_BLOCK)
+            .input('C', Items.COMPARATOR)
+            .pattern("TST")
+            .pattern("ARA")
+            .pattern("QCQ")
+            .criterion(hasItem(Items.CALIBRATED_SCULK_SENSOR),
+                conditionsFromItem(Items.CALIBRATED_SCULK_SENSOR))
+            .offerTo(exporter);
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ELECTRONIC_NUCLEUS_MATRIX, 1)
+            .input('G', Items.GOLD_BLOCK)
+            .input('A', Items.AMETHYST_SHARD)
+            .input('P', Items.ENDER_PEARL)
+            .input('E', ModItems.ELECTRONIC_ESSENCE)
+            .input('I', Items.PACKED_ICE)
+            .pattern("GAG")
+            .pattern("PEP")
+            .pattern("GIG")
+            .criterion(hasItem(ModItems.ELECTRONIC_ESSENCE),
+                conditionsFromItem(ModItems.ELECTRONIC_ESSENCE))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.INSIGHT_ROD, 1)
+            .input('I', ModItems.INDUCTIVE_PREAMPLIFIER)
+            .input('E', Items.ENDER_EYE)
+            .input('C', Items.COPPER_INGOT)
+            .pattern("IEI")
+            .pattern(" C ")
+            .pattern(" C ")
+            .criterion(hasItem(Items.ENDER_EYE), conditionsFromItem(Items.ENDER_EYE))
+            .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CHROMOGENIC_LENS, 1)
+            .input('P', Items.GLASS_PANE)
+            .input('R', Items.RED_DYE)
+            .input('G', Items.GREEN_DYE)
+            .input('B', Items.BLUE_DYE)
+            .pattern("PPP")
+            .pattern("RGB")
+            .pattern("PPP")
+            .criterion(hasItem(Items.GLASS_PANE), conditionsFromItem(Items.GLASS_PANE))
             .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.NIGHT_VISION_GOLDEN_CARROT, 3)
@@ -339,13 +388,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .offerTo(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, Items.DISC_FRAGMENT_5, 1)
-            .input('S', Blocks.SCULK)
+            .input('S', Items.SCULK)
             .input('D', ModItems.DISC_FRAGMENT_GENERAL)
             .group(HelpfulFuncs.getSimpleIdStr(Items.DISC_FRAGMENT_5))
             .pattern(" S ")
             .pattern("SDS")
             .pattern(" S ")
-            .criterion(hasItem(Blocks.SCULK), conditionsFromItem(Blocks.SCULK))
+            .criterion(hasItem(Items.SCULK), conditionsFromItem(Items.SCULK))
             .offerTo(exporter, HelpfulFuncs.getModNamespacedSimpleIdStr(Items.DISC_FRAGMENT_5));
     }
 
