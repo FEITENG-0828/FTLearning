@@ -1,7 +1,7 @@
 package com.feiteng.ftlearning;
 
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.item.custom.ARGlassesItem;
+import com.feiteng.ftlearning.item.custom.ArGlassesItem;
 import com.feiteng.ftlearning.render.LookThroughBlockRenderer;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -46,7 +46,7 @@ public class FTLearningClient implements ClientModInitializer {
         WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register((context, hit_result) -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player != null &&
-                player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ARGlassesItem) {
+                player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArGlassesItem) {
                 return LookThroughBlockRenderer.render(context, player);
             } else {
                 return true;

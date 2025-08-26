@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -52,7 +53,7 @@ public class AdvancedProspectorItem extends Item {
         super(settings);
     }
 
-    public static int getRenderColor(Block block) {
+    public static Integer getRenderRgb(Block block) {
         return PROSPECTING_LIST.getOrDefault(block, 0xFFFFFF);
     }
 
@@ -158,9 +159,10 @@ public class AdvancedProspectorItem extends Item {
         return false;
     }
 
-    public static void forEachOre(
+    public static void forEachOreMatchingPredicate(
         ItemStack stack,
-        BiConsumer<? super Block, ? super List<BlockPos>> action
+        @Nullable Predicate<? super BlockPos> pos_predicate,
+        BiConsumer<? super Block, ? super BlockPos> action
     ) {
         if (stack.getSubNbt("OreCache") != null &&
             stack.getSubNbt("OreCache").contains("OreList")) {
@@ -175,17 +177,15 @@ public class AdvancedProspectorItem extends Item {
                     NbtList pos_list_nbt =
                         ore_entry_nbt.getList("PosList", NbtElement.COMPOUND_TYPE);
                     if (block != null && !pos_list_nbt.isEmpty()) {
-                        List<BlockPos> pos_list = new ArrayList<>();
                         for (int j = 0; j < pos_list_nbt.size(); ++j) {
-                            pos_list.add(NbtHelper.toBlockPos(pos_list_nbt.getCompound(j)));
+                            BlockPos pos = NbtHelper.toBlockPos(pos_list_nbt.getCompound(j));
+                            if (pos_predicate == null || pos_predicate.test(pos)) {
+                                action.accept(block, pos);
+                            }
                         }
-                        action.accept(block, pos_list);
                     }
                 }
             }
         }
     }
-
-    // render distance, color
-
 }

@@ -1,7 +1,7 @@
 package com.feiteng.ftlearning.item;
 
 import com.feiteng.ftlearning.FTLearning;
-import com.feiteng.ftlearning.item.custom.ARGlassesItem;
+import com.feiteng.ftlearning.item.custom.ArGlassesItem;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
@@ -119,8 +119,8 @@ public class ModItems {
 
     public static final Item AR_GLASSES = register(
         "ar_glasses",
-        new ARGlassesItem(new FabricItemSettings()
-            .maxDamage(1024)
+        new ArGlassesItem(new FabricItemSettings()
+            .maxDamage(64)
             .equipmentSlot(stack -> EquipmentSlot.HEAD))
     );
 
