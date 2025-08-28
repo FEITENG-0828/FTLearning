@@ -7,7 +7,6 @@ import com.feiteng.ftlearning.render.LookThroughBlockRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
@@ -42,15 +41,13 @@ public class FTLearningClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(
             RenderLayer.getCutout(), ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
 
-        // ServerLivingEntityEvents.ALLOW_DAMAGE.register(null); // TODO
         WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register((context, hit_result) -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             if (player != null &&
                 player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArGlassesItem) {
-                return LookThroughBlockRenderer.render(context, player);
-            } else {
-                return true;
+                LookThroughBlockRenderer.render(context, player);
             }
+            return true;
         });
     }
 }

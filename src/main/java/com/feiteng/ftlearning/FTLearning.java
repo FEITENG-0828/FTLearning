@@ -1,14 +1,23 @@
 package com.feiteng.ftlearning;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.item.custom.ArGlassesItem;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
-import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public class FTLearning implements ModInitializer {
     public static final String MOD_ID = "ftlearning";
@@ -23,7 +32,8 @@ public class FTLearning implements ModInitializer {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
-        LOGGER.info("Hello Fabric world!");
+
+        // LOGGER.info("Hello Fabric world!");
 
         ModBlocks.registerModBlocks();
         ModItems.registerModItems();
@@ -32,5 +42,24 @@ public class FTLearning implements ModInitializer {
 
         FuelRegistry.INSTANCE.add(ModItems.FIRST_ITEM, 3200);
         FuelRegistry.INSTANCE.add(ModBlocks.FIRST_ITEM_BLOCK, 32000);
+
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+            if (entity instanceof ServerPlayerEntity player)
+            {
+                ItemStack stack = player.getEquippedStack(EquipmentSlot.HEAD);
+                if (stack.getItem() instanceof ArGlassesItem) {
+                    RegistryEntry<DamageType> damage_type = source.getTypeRegistryEntry();
+                    if (damage_type != null && (damage_type.isIn(DamageTypeTags.DAMAGES_HELMET) ||
+                            damage_type.isIn(DamageTypeTags.IS_EXPLOSION) ||
+                            damage_type.isIn(DamageTypeTags.IS_LIGHTNING))
+                        ) {
+                        stack.damage(3, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+                    } else {
+                        stack.damage(1, player, p -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+                    }
+                }
+            }
+            return true;
+        });
     }
 }

@@ -20,7 +20,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 
 public class LookThroughBlockRenderer {
-    public static boolean render(WorldRenderContext context, ClientPlayerEntity player) {
+    public static void render(WorldRenderContext context, ClientPlayerEntity player) {
         MatrixStack matrix_stack = context.matrixStack();
         matrix_stack.push();
 
@@ -52,7 +52,6 @@ public class LookThroughBlockRenderer {
         }
 
         matrix_stack.pop();
-        return true;
     }
 
     private static void renderBlockOutline(
