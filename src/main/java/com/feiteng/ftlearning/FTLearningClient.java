@@ -1,6 +1,7 @@
 package com.feiteng.ftlearning;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.custom.ArGlassesItem;
 import com.feiteng.ftlearning.render.LookThroughBlockRenderer;
 
@@ -20,26 +21,7 @@ public class FTLearningClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(
             ModBlocks.VOIDABYSS_STONE_TRAPDOOR, RenderLayer.getCutout());
 
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.DIRT_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.SAND_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.GRAVEL_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.NETHERRACK_COMPRESSED_BLOCKS);
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-            RenderLayer.getCutout(), ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
+        CompressedBlocks.mapRenderLayerAll();
 
         WorldRenderEvents.BEFORE_BLOCK_OUTLINE.register((context, hit_result) -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;

@@ -1,18 +1,20 @@
 package com.feiteng.ftlearning.datagen;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
-import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
 
 public class ModZhCnLangProvider extends FabricLanguageProvider {
+    public String language_code;
+
     public ModZhCnLangProvider(FabricDataOutput dataOutput) {
         super(dataOutput, "zh_cn");
+        this.language_code = "zh_cn";
     }
 
     @Override
@@ -91,34 +93,6 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getTranslationKey() + ".desc",
             "V在燃烧 - I Got Smoke (Explicit Ver.)");
 
-        addCompressedBlockKind(
-            builder, "圆石", ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "泥土", ModBlocks.DIRT_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "沙子", ModBlocks.SAND_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "沙砾", ModBlocks.GRAVEL_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "深板岩圆石", ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "红石块", ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "青金石块", ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "紫水晶块", ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "下界岩", ModBlocks.NETHERRACK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "灵魂沙", ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
-    }
-
-    public static void addCompressedBlockKind(
-        TranslationBuilder builder, String base_name, Block[] blocks
-    ) {
-        for (int i = 0; i < blocks.length; ++i) {
-            builder.add(blocks[i],
-                HelpfulFuncs.getCompressedBlockName(base_name, i + 1, "zh_cn"));
-        }
+        CompressedBlocks.translateAll(builder, this.language_code);
     }
 }

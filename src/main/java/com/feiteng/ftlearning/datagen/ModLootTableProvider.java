@@ -1,6 +1,8 @@
 package com.feiteng.ftlearning.datagen;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
@@ -35,36 +37,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         addDrop(ModBlocks.SHUODEDAOLI_BLOCK);
 
-        for (Block block : ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.DIRT_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.SAND_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.GRAVEL_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.NETHERRACK_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
-        for (Block block : ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS) {
-            addDrop(block);
-        }
+        CompressedBlocks.generateLootTableAll(this);
     }
 
     public LootTable.Builder oreDropsWithFortune(

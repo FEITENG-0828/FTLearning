@@ -4,12 +4,12 @@ import org.jetbrains.annotations.Nullable;
 
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -84,7 +84,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             .input('I', ModItems.INSIGHT_ROD)
             .input('F', ModBlocks.FIRST_ITEM_BLOCK)
             .input('E', ModItems.ELECTRONIC_NUCLEUS_MATRIX)
-            .input('L', ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS[0])
+            .input('L', CompressedBlocks.getBlock(Blocks.LAPIS_BLOCK, (short)1))
             .pattern("I I")
             .pattern("FEF")
             .pattern("LFL")
@@ -338,46 +338,27 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 ModBlocks.SHUODEDAOLI_BLOCK, null),
             HelpfulFuncs.getSimpleIdStr(ModItems.SHUODEDAOLI));
 
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.COBBLESTONE, ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.DIRT, ModBlocks.DIRT_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.SAND, ModBlocks.SAND_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.GRAVEL, ModBlocks.GRAVEL_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.COBBLED_DEEPSLATE, ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.REDSTONE_BLOCK, ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.LAPIS_BLOCK, ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.AMETHYST_BLOCK, ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.NETHERRACK, ModBlocks.NETHERRACK_COMPRESSED_BLOCKS);
-        offerReversibleCompressedBlockKindRecipes(exporter,
-            Blocks.SOUL_SAND, ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
+        CompressedBlocks.generateRecipeAll(exporter);
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, Items.GHAST_TEAR, 1)
-            .input('C', ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS[0])
+            .input('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short)1))
             .input('F', ModItems.FIRST_ITEM)
             .group(HelpfulFuncs.getSimpleIdStr(Items.GHAST_TEAR))
-            .pattern("CCC")
-            .pattern("CFC")
-            .pattern("CCC")
-            .criterion(hasItem(ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS[0]),
-                conditionsFromItem(ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS[0]))
+            .pattern("SSS")
+            .pattern("SFS")
+            .pattern("SSS")
+            .criterion(hasItem(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short)1)),
+                conditionsFromItem(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short)1)))
             .offerTo(exporter, HelpfulFuncs.getModNamespacedSimpleIdStr(Items.GHAST_TEAR));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, Items.NETHER_STAR, 2)
-            .input('C', ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS[1])
+            .input('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short)2))
             .input('F', ModBlocks.FIRST_ITEM_BLOCK)
             .input('N', Items.NETHER_STAR)
             .group(HelpfulFuncs.getSimpleIdStr(Items.NETHER_STAR))
-            .pattern("FCF")
-            .pattern("CNC")
-            .pattern("FCF")
+            .pattern("FSF")
+            .pattern("SNS")
+            .pattern("FSF")
             .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
             .offerTo(exporter, HelpfulFuncs.getModNamespacedSimpleIdStr(Items.NETHER_STAR));
 
@@ -408,31 +389,5 @@ public class ModRecipeProvider extends FabricRecipeProvider {
             + "_" + insert_str_1 + "_"
             + HelpfulFuncs.getSimpleIdStr(input_item)
             + (insert_str_2 != null && !insert_str_2.isEmpty() ? ("_" + insert_str_2) : "");
-    }
-
-    public static void offerReversibleCompressedBlockKindRecipes(
-        RecipeExporter exporter, Block origin_block, Block[] blocks
-    ) {
-        for (int i = 0; i < blocks.length; ++i) {
-            if (i == 0) {
-                offerReversibleBlockCompressRecipes(exporter, origin_block, blocks[i]);
-            } else {
-                offerReversibleBlockCompressRecipes(exporter, blocks[i - 1], blocks[i]);
-            }
-        }
-    }
-
-    public static void offerReversibleBlockCompressRecipes(
-        RecipeExporter exporter, Block base_block, Block compressed_block
-    ) {
-        offerReversibleCompactingRecipes(exporter,
-            RecipeCategory.BUILDING_BLOCKS, base_block,
-            RecipeCategory.BUILDING_BLOCKS, compressed_block,
-            getModRecipeName(compressed_block, "from",
-                base_block, null),
-            HelpfulFuncs.getSimpleIdStr(compressed_block),
-            getModRecipeName(base_block, "from",
-                compressed_block, null),
-            HelpfulFuncs.getSimpleIdStr(base_block));
     }
 }

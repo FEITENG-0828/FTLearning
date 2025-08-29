@@ -2,8 +2,10 @@ package com.feiteng.ftlearning.item;
 
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
+
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -80,38 +82,9 @@ public class ModItemGroups {
             FTL_GROUP_COMPRESSED,
             FabricItemGroup.builder()
                 .displayName(Text.translatable("itemGroup.ftlearning.ftl_group_compressed"))
-                .icon(() -> new ItemStack(ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS[0]))
+                .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short)1)))
                 .entries((display_context, entries) -> {
-                    for (Block block : ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.DIRT_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.SAND_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.GRAVEL_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.NETHERRACK_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
-                    for (Block block : ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS) {
-                        entries.add(block);
-                    }
+                    CompressedBlocks.registerItemGroupAll(entries);
                 })
                 .build());
     }

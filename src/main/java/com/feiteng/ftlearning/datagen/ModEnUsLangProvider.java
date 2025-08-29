@@ -1,18 +1,20 @@
 package com.feiteng.ftlearning.datagen;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
-import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.block.Block;
 
 public class ModEnUsLangProvider extends FabricLanguageProvider {
+    public String language_code;
+
     public ModEnUsLangProvider(FabricDataOutput dataOutput) {
         super(dataOutput, "en_us");
+        this.language_code = "en_us";
     }
 
     @Override
@@ -92,34 +94,6 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getTranslationKey() + ".desc",
             "Venoflame - I Got Smoke (Explicit Ver.)");
 
-        addCompressedBlockKind(
-            builder, "Cobblestone", ModBlocks.COBBLESTONE_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Dirt", ModBlocks.DIRT_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Sand", ModBlocks.SAND_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Gravel", ModBlocks.GRAVEL_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Cobbled Deepslate", ModBlocks.COBBLED_DEEPSLATE_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Block of Redstone", ModBlocks.REDSTONE_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Block of Lapis Lazuli", ModBlocks.LAPIS_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Block of Amethyst", ModBlocks.AMETHYST_BLOCK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Netherrack", ModBlocks.NETHERRACK_COMPRESSED_BLOCKS);
-        addCompressedBlockKind(
-            builder, "Soul Sand", ModBlocks.SOUL_SAND_COMPRESSED_BLOCKS);
-    }
-
-    public static void addCompressedBlockKind(
-        TranslationBuilder builder, String base_name, Block[] blocks
-    ) {
-        for (int i = 0; i < blocks.length; ++i) {
-            builder.add(blocks[i],
-                HelpfulFuncs.getCompressedBlockName(base_name, i + 1, "en_us"));
-        }
+        CompressedBlocks.translateAll(builder, this.language_code);
     }
 }
