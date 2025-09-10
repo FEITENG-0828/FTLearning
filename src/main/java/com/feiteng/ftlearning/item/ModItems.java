@@ -113,8 +113,7 @@ public class ModItems {
     public static final Item ADVANCED_PROSPECTOR = register(
         "advanced_prospector",
         new AdvancedProspectorItem(new FabricItemSettings()
-            .maxDamage(64)
-            .recipeRemainder(DISC_FRAGMENT_GENERAL))
+            .maxDamage(64))
     );
 
     public static final Item AR_GLASSES = register(

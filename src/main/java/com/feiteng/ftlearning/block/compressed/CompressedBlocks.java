@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import com.feiteng.ftlearning.FTLearning;
@@ -27,15 +29,23 @@ import net.minecraft.block.AmethystBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ColoredFallingBlock;
+import net.minecraft.block.MossBlock;
 import net.minecraft.block.NetherrackBlock;
+import net.minecraft.block.Oxidizable;
+import net.minecraft.block.OxidizableBlock;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.block.RedstoneBlock;
 import net.minecraft.block.SoulSandBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateSupplier;
+import net.minecraft.data.client.BlockStateVariant;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.ModelIds;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.VariantSettings;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -64,6 +74,8 @@ public final class CompressedBlocks {
     private Block[] compressed;
     private short max_level;
     private List<TagKey<Block>> tags;
+    private BiConsumer<ModLootTableProvider, Block> drop_consumer;
+    private BiFunction<Block, Identifier, BlockStateSupplier> blockstate_function;
     private Map<String, String> translations;
     private RenderLayer render_layer;
 
@@ -72,6 +84,8 @@ public final class CompressedBlocks {
         Block[] compressed,
         short max_level,
         List<TagKey<Block>> tags,
+        BiConsumer<ModLootTableProvider, Block> drop_consumer,
+        BiFunction<Block, Identifier, BlockStateSupplier> blockstate_function,
         Map<String, String> translations,
         RenderLayer render_layer
     ) {
@@ -79,25 +93,20 @@ public final class CompressedBlocks {
         this.compressed = compressed;
         this.max_level = max_level;
         this.tags = tags;
+        this.drop_consumer = drop_consumer;
+        this.blockstate_function = blockstate_function;
         this.translations = translations;
         this.render_layer = render_layer;
     }
 
     public static void createAll() {
-        create(Blocks.COBBLESTONE,
-            (short)9,
-            Block::new,
-            List.of(BlockTags.PICKAXE_MINEABLE),
-            Map.ofEntries(
-                Map.entry("en_us", "Cobblestone"),
-                Map.entry("zh_cn", "圆石")
-            ),
-            RenderLayer.getCutout());
         create(Blocks.DIRT,
             (short)9,
             Block::new,
             List.of(BlockTags.SHOVEL_MINEABLE,
                 BlockTags.DIRT),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createBlockStateWithRandomHorizontalRotations,
             Map.ofEntries(
                 Map.entry("en_us", "Dirt"),
                 Map.entry("zh_cn", "泥土")
@@ -109,9 +118,23 @@ public final class CompressedBlocks {
             List.of(BlockTags.SHOVEL_MINEABLE,
                 BlockTags.SAND,
                 BlockTags.RABBITS_SPAWNABLE_ON),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createBlockStateWithRandomHorizontalRotations,
             Map.ofEntries(
                 Map.entry("en_us", "Sand"),
                 Map.entry("zh_cn", "沙子")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.RED_SAND,
+            (short)9,
+            settings -> new ColoredFallingBlock(new ColorCode(11098145), settings),
+            List.of(BlockTags.SHOVEL_MINEABLE,
+                BlockTags.SAND),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createBlockStateWithRandomHorizontalRotations,
+            Map.ofEntries(
+                Map.entry("en_us", "Red Sand"),
+                Map.entry("zh_cn", "红沙")
             ),
             RenderLayer.getCutout());
         create(Blocks.GRAVEL,
@@ -120,24 +143,212 @@ public final class CompressedBlocks {
             List.of(BlockTags.SHOVEL_MINEABLE,
                 BlockTags.BAMBOO_PLANTABLE_ON,
                 BlockTags.ANIMALS_SPAWNABLE_ON),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Gravel"),
                 Map.entry("zh_cn", "沙砾")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.STONE, // FIXME: blockstate
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.GOATS_SPAWNABLE_ON,
+                BlockTags.SNAPS_GOAT_HORN),
+            (provider, block) -> provider.addDrop(block,
+                b -> provider.drops(b, getBlock(Blocks.COBBLESTONE, getLevel(b)))),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Stone"),
+                Map.entry("zh_cn", "石头")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.COBBLESTONE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Cobblestone"),
+                Map.entry("zh_cn", "圆石")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.GRANITE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Granite"),
+                Map.entry("zh_cn", "花岗岩")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.DIORITE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Diorite"),
+                Map.entry("zh_cn", "闪长岩")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.ANDESITE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Andesite"),
+                Map.entry("zh_cn", "安山岩")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.TUFF,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Tuff"),
+                Map.entry("zh_cn", "凝灰岩")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.MOSS_BLOCK,
+            (short)9,
+            settings -> new MossBlock(settings),
+            List.of(BlockTags.HOE_MINEABLE,
+                BlockTags.DIRT,
+                BlockTags.SNIFFER_EGG_HATCH_BOOST),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Moss Block"),
+                Map.entry("zh_cn", "苔藓块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.DEEPSLATE, // FIXME: blockstate
+            (short)9,
+            PillarBlock::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block,
+                b -> provider.drops(b, getBlock(Blocks.COBBLED_DEEPSLATE, getLevel(b)))),
+            BlockStateModelGenerator::createAxisRotatedBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Deepslate"),
+                Map.entry("zh_cn", "深板岩")
             ),
             RenderLayer.getCutout());
         create(Blocks.COBBLED_DEEPSLATE,
             (short)9,
             Block::new,
             List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Cobbled Deepslate"),
                 Map.entry("zh_cn", "深板岩圆石")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.COAL_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Coal"),
+                Map.entry("zh_cn", "煤炭块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.COPPER_BLOCK, // FIXME: oxidizable and waxable
+            (short)3,
+            settings -> new OxidizableBlock(Oxidizable.OxidationLevel.UNAFFECTED, settings),
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_STONE_TOOL),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Copper"),
+                Map.entry("zh_cn", "铜块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.IRON_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_STONE_TOOL,
+                BlockTags.BEACON_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Iron"),
+                Map.entry("zh_cn", "铁块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.GOLD_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_STONE_TOOL,
+                BlockTags.BEACON_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Gold"),
+                Map.entry("zh_cn", "金块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.DIAMOND_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_IRON_TOOL,
+                BlockTags.BEACON_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Diamond"),
+                Map.entry("zh_cn", "钻石块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.NETHERITE_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_DIAMOND_TOOL,
+                BlockTags.BEACON_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Netherite"),
+                Map.entry("zh_cn", "下界合金块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.EMERALD_BLOCK,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_IRON_TOOL,
+                BlockTags.BEACON_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Block of Emerald"),
+                Map.entry("zh_cn", "绿宝石块")
             ),
             RenderLayer.getCutout());
         create(Blocks.REDSTONE_BLOCK,
             (short)3,
             RedstoneBlock::new,
             List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Block of Redstone"),
                 Map.entry("zh_cn", "红石块")
@@ -148,6 +359,8 @@ public final class CompressedBlocks {
             Block::new,
             List.of(BlockTags.PICKAXE_MINEABLE,
                 BlockTags.NEEDS_STONE_TOOL),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Block of Lapis Lazuli"),
                 Map.entry("zh_cn", "青金石块")
@@ -159,9 +372,24 @@ public final class CompressedBlocks {
             List.of(BlockTags.PICKAXE_MINEABLE,
                 BlockTags.CRYSTAL_SOUND_BLOCKS,
                 BlockTags.VIBRATION_RESONATORS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Block of Amethyst"),
                 Map.entry("zh_cn", "紫水晶块")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.OBSIDIAN,
+            (short)3,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.NEEDS_DIAMOND_TOOL,
+                BlockTags.DRAGON_IMMUNE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Obsidian"),
+                Map.entry("zh_cn", "黑曜石")
             ),
             RenderLayer.getCutout());
         create(Blocks.NETHERRACK,
@@ -169,21 +397,96 @@ public final class CompressedBlocks {
             NetherrackBlock::new,
             List.of(BlockTags.PICKAXE_MINEABLE,
                 BlockTags.INFINIBURN_OVERWORLD),
+            (provider, block) -> provider.addDrop(block),
+            (block, model_id) -> {
+                VariantSettings.Rotation[] rotations = {
+                    VariantSettings.Rotation.R0,
+                    VariantSettings.Rotation.R90,
+                    VariantSettings.Rotation.R180,
+                    VariantSettings.Rotation.R270
+                };
+
+                List<BlockStateVariant> variants = new ArrayList<>();
+                for (VariantSettings.Rotation x_rotation : rotations) {
+                    for (VariantSettings.Rotation y_rotation : rotations) {
+                        var variant = BlockStateVariant.create().put(VariantSettings.MODEL, model_id);
+                        if (x_rotation != VariantSettings.Rotation.R0) {
+                            variant = variant.put(VariantSettings.X, x_rotation);
+                        }
+                        if (y_rotation != VariantSettings.Rotation.R0) {
+                            variant = variant.put(VariantSettings.Y, y_rotation);
+                        }
+                        variants.add(variant);
+                    }
+                }
+
+                return VariantsBlockStateSupplier.create(
+                    block, variants.toArray(new BlockStateVariant[0]));
+            },
             Map.ofEntries(
                 Map.entry("en_us", "Netherrack"),
                 Map.entry("zh_cn", "下界岩")
             ),
             RenderLayer.getCutout());
+        create(Blocks.BASALT,
+            (short)9,
+            PillarBlock::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createAxisRotatedBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Basalt"),
+                Map.entry("zh_cn", "玄武岩")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.BLACKSTONE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Blackstone"),
+                Map.entry("zh_cn", "黑石")
+            ),
+            RenderLayer.getCutout());
         create(Blocks.SOUL_SAND,
-            (short)3,
+            (short)9,
             SoulSandBlock::new,
             List.of(BlockTags.SHOVEL_MINEABLE,
                 BlockTags.SOUL_SPEED_BLOCKS,
                 BlockTags.SOUL_FIRE_BASE_BLOCKS,
                 BlockTags.SNOW_LAYER_CAN_SURVIVE_ON),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
             Map.ofEntries(
                 Map.entry("en_us", "Soul Sand"),
                 Map.entry("zh_cn", "灵魂沙")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.SOUL_SOIL,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.SHOVEL_MINEABLE,
+                BlockTags.SOUL_SPEED_BLOCKS,
+                BlockTags.SOUL_FIRE_BASE_BLOCKS),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "Soul Soil"),
+                Map.entry("zh_cn", "灵魂土")
+            ),
+            RenderLayer.getCutout());
+        create(Blocks.END_STONE,
+            (short)9,
+            Block::new,
+            List.of(BlockTags.PICKAXE_MINEABLE,
+                BlockTags.DRAGON_IMMUNE),
+            (provider, block) -> provider.addDrop(block),
+            BlockStateModelGenerator::createSingletonBlockState,
+            Map.ofEntries(
+                Map.entry("en_us", "End Stone"),
+                Map.entry("zh_cn", "末地石")
             ),
             RenderLayer.getCutout());
     }
@@ -193,6 +496,8 @@ public final class CompressedBlocks {
         short max_level,
         Function<FabricBlockSettings, ? extends Block> block_factory,
         List<TagKey<Block>> tags,
+        BiConsumer<ModLootTableProvider, Block> drop_consumer,
+        BiFunction<Block, Identifier, BlockStateSupplier> blockstate_function,
         Map<String, String> translations,
         RenderLayer render_layer
     ) {
@@ -206,6 +511,8 @@ public final class CompressedBlocks {
             compressed,
             max_level,
             mutable_tags,
+            drop_consumer,
+            blockstate_function,
             translations,
             render_layer
         );
@@ -304,7 +611,7 @@ public final class CompressedBlocks {
 
     private static void generateLootTable(ModLootTableProvider provider, CompressedBlocks entry) {
         for (Block block : entry.compressed) {
-            provider.addDrop(block);
+            entry.drop_consumer.accept(provider, block);
         }
     }
 
@@ -330,8 +637,8 @@ public final class CompressedBlocks {
             Identifier model_id = model.upload(
                 ModelIds.getBlockModelId(entry.compressed[i]), texture_map,
                 generator.modelCollector, expandJsonFactory(model));
-            generator.blockStateCollector.accept(
-                BlockStateModelGenerator.createSingletonBlockState(entry.compressed[i], model_id));
+            generator.blockStateCollector.accept(entry.blockstate_function.apply(
+                entry.compressed[i], model_id));
         }
     }
 
@@ -433,6 +740,26 @@ public final class CompressedBlocks {
             }
         }
         return null;
+    }
+
+    public static short getMaxLevel(Block origin) {
+        for (CompressedBlocks entry : SET) {
+            if (entry.origin == origin) {
+                return entry.max_level;
+            }
+        }
+        return -1;
+    }
+
+    public static short getLevel(@NotNull Block block) {
+        for (CompressedBlocks entry : SET) {
+            for (short i = 0; i < entry.compressed.length; ++i) {
+                if (entry.compressed[i] == block) {
+                    return (short)(i + 1);
+                }
+            }
+        }
+        return -1;
     }
 
     static {
