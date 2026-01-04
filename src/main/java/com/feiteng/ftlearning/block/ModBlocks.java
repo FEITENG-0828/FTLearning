@@ -39,7 +39,7 @@ public class ModBlocks {
             .mapColor(MapColor.BRIGHT_RED))
     );
 
-    public static final Block VOIDABYSS_STONE = register(
+    public static final Block VOIDABYSS_STONE = register( // TODO : random rotations
         "voidabyss_stone",
         new Block(FabricBlockSettings.copyOf(Blocks.DEEPSLATE)
             .mapColor(MapColor.BLUE))

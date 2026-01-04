@@ -16,6 +16,7 @@ import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.datagen.ModBlockTagProvider;
 import com.feiteng.ftlearning.datagen.ModLootTableProvider;
+import com.feiteng.ftlearning.datagen.ModModelProvider;
 import com.feiteng.ftlearning.datagen.ModRecipeProvider;
 import com.feiteng.ftlearning.tag.ModBlockTags;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
@@ -39,13 +40,10 @@ import net.minecraft.block.SoulSandBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.BlockStateSupplier;
-import net.minecraft.data.client.BlockStateVariant;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.ModelIds;
 import net.minecraft.data.client.TextureKey;
 import net.minecraft.data.client.TextureMap;
-import net.minecraft.data.client.VariantSettings;
-import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -219,7 +217,7 @@ public final class CompressedBlocks {
                 Map.entry("zh_cn", "凝灰岩")
             ),
             RenderLayer.getCutout());
-        create(Blocks.MOSS_BLOCK,
+        create(Blocks.MOSS_BLOCK, //FIXME: fertilizable
             (short)9,
             settings -> new MossBlock(settings),
             List.of(BlockTags.HOE_MINEABLE,
@@ -398,31 +396,7 @@ public final class CompressedBlocks {
             List.of(BlockTags.PICKAXE_MINEABLE,
                 BlockTags.INFINIBURN_OVERWORLD),
             (provider, block) -> provider.addDrop(block),
-            (block, model_id) -> {
-                VariantSettings.Rotation[] rotations = {
-                    VariantSettings.Rotation.R0,
-                    VariantSettings.Rotation.R90,
-                    VariantSettings.Rotation.R180,
-                    VariantSettings.Rotation.R270
-                };
-
-                List<BlockStateVariant> variants = new ArrayList<>();
-                for (VariantSettings.Rotation x_rotation : rotations) {
-                    for (VariantSettings.Rotation y_rotation : rotations) {
-                        var variant = BlockStateVariant.create().put(VariantSettings.MODEL, model_id);
-                        if (x_rotation != VariantSettings.Rotation.R0) {
-                            variant = variant.put(VariantSettings.X, x_rotation);
-                        }
-                        if (y_rotation != VariantSettings.Rotation.R0) {
-                            variant = variant.put(VariantSettings.Y, y_rotation);
-                        }
-                        variants.add(variant);
-                    }
-                }
-
-                return VariantsBlockStateSupplier.create(
-                    block, variants.toArray(new BlockStateVariant[0]));
-            },
+            ModModelProvider::createBlockStateWithAllRandomRotations,
             Map.ofEntries(
                 Map.entry("en_us", "Netherrack"),
                 Map.entry("zh_cn", "下界岩")

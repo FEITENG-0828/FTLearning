@@ -23,30 +23,4 @@ public class HelpfulFuncs {
                 .formatted(Formatting.GOLD, Formatting.UNDERLINE))
             .append(Text.translatable("item.ftlearning.tooltip_mask2").formatted(Formatting.AQUA));
     }
-
-    public static String compressLevelToRoman(int level) {
-        return switch (level) {
-            case 1 -> "I";
-            case 2 -> "II";
-            case 3 -> "III";
-            case 4 -> "IV";
-            case 5 -> "V";
-            case 6 -> "VI";
-            case 7 -> "VII";
-            case 8 -> "VIII";
-            case 9 -> "IX";
-            default -> throw new IllegalArgumentException("Invalid compression level");
-        };
-    }
-
-    public static String getCompressedBlockName(String base_name, int level, String language_code) {
-        if (level < 1 || level > 9) {
-            throw new IllegalArgumentException("Invalid compression level");
-        }
-        return switch (language_code) {
-            case "en_us" -> "Compressed " + base_name + ' ' + compressLevelToRoman(level);
-            case "zh_cn" -> compressLevelToRoman(level) + "级" + "压缩" + base_name;
-            default -> "Compressed " + base_name + ' ' + compressLevelToRoman(level);
-        };
-    }
 }
