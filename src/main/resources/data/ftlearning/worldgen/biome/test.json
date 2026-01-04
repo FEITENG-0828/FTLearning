@@ -1,0 +1,37 @@
+{
+  "carvers": {
+    "air": []
+  },
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 17013,
+    "foliage_color": 9794,
+    "grass_color": 2643575,
+    "sky_color": 30719,
+    "water_color": 9746687,
+    "water_fog_color": 3421367,
+    "particle" : {
+      "probability": 0.001,
+      "options": {
+        "type": "minecraft:nautilus"
+      }
+    }
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {},
+  "temperature": 0.6
+}

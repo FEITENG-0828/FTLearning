@@ -1,0 +1,101 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:overworld"
+        },
+        "settings": "minecraft:overworld"
+      }
+    },
+    "minecraft:the_end": {
+      "type": "minecraft:the_end",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:the_end"
+        },
+        "settings": "minecraft:end"
+      }
+    },
+    "minecraft:the_nether": {
+      "type": "minecraft:the_nether",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:nether"
+        },
+        "settings": "minecraft:nether"
+      }
+    },
+    "minecraft:checkerboard": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:checkerboard",
+          "biomes": [
+            "minecraft:cherry_grove",
+            "minecraft:snowy_slopes",
+            "minecraft:bamboo_jungle"
+          ]
+        },
+        "settings": "minecraft:overworld"
+      }
+    },
+    "minecraft:fixed_test": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:fixed",
+          "biome": "ftlearning:test"
+        },
+        "settings": "minecraft:overworld"
+      }
+    },
+    "minecraft:overworld_cave": {
+      "type": "minecraft:overworld_caves",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:overworld"
+        },
+        "settings": "minecraft:caves"
+      }
+    },
+    "minecraft:nether_cave": {
+      "type": "minecraft:overworld_caves",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:nether"
+        },
+        "settings": "minecraft:caves"
+      }
+    },
+    "minecraft:overworld_caves_custom_type": {
+      "type": "minecraft:overworld_caves",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:checkerboard",
+          "biomes": [
+            "minecraft:badlands",
+            "minecraft:end_highlands",
+            "minecraft:soul_sand_valley",
+            "minecraft:deep_lukewarm_ocean",
+            "ftlearning:test"
+          ]
+        },
+        "settings": "minecraft:caves"
+      }
+    }
+  }
+}
