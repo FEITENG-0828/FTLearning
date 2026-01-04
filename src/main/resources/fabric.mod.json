@@ -1,40 +1,37 @@
 {
-    "schemaVersion" : 1,
-    "id" : "ftlearning",
-    "version" : "${version}",
-    "name" : "FTLearning",
-    "description" : "FEITENG's First Fabric Minecraft Mod! (With Learning)",
-    "authors" : [
+    "schemaVersion": 1,
+    "id": "ftlearning",
+    "version": "${version}",
+    "name": "FTLearning",
+    "description": "FEITENG's First Fabric Minecraft Mod! (With Learning)",
+    "authors": [
         "FEITENG"
     ],
-    "contact" : {
-        "homepage" : "https://github.com/FEITENG-0828",
-        "sources" : "https://github.com/FEITENG-0828"
+    "contact": {
+        "homepage": "https://github.com/FEITENG-0828",
+        "sources": "https://github.com/FEITENG-0828"
     },
-    "license" : "MIT",
-    "icon" : "assets/ftlearning/icon.png",
-    "environment" : "*",
-    "entrypoints" : {
-        "main" : [
+    "license": "MIT",
+    "icon": "assets/ftlearning/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
             "com.feiteng.ftlearning.FTLearning"
         ],
-        "client" : [
+        "client": [
             "com.feiteng.ftlearning.FTLearningClient"
         ],
-        "fabric-datagen" : [
+        "fabric-datagen": [
             "com.feiteng.ftlearning.FTLearningDataGenerator"
         ]
     },
-    "mixins" : [
+    "mixins": [
         "ftlearning.mixins.json"
     ],
-    "depends" : {
-        "fabricloader" : ">=0.15.10",
-        "minecraft" : "~1.20.4",
-        "java" : ">=17",
-        "fabric-api" : "*"
-    },
-    "suggests" : {
-        "another-mod" : "*"
+    "depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+        "fabric-api": "*"
     }
 }
