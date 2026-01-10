@@ -5,87 +5,88 @@ import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 
 public class ModItemGroups {
-    public static final RegistryKey<ItemGroup> FTL_GROUP_CORE = getRegistryKey("ftl_group_core");
-    public static final RegistryKey<ItemGroup> FTL_GROUP_COMPRESSED = getRegistryKey("ftl_group_compressed");
+    public static final ResourceKey<CreativeModeTab> FTL_GROUP_CORE = createKey("ftl_group_core");
+    public static final ResourceKey<CreativeModeTab> FTL_GROUP_COMPRESSED = createKey("ftl_group_compressed");
 
-    private static RegistryKey<ItemGroup> getRegistryKey(String id) {
-        return RegistryKey.of(RegistryKeys.ITEM_GROUP, new Identifier(FTLearning.MOD_ID, id));
+    private static ResourceKey<CreativeModeTab> createKey(String id) {
+        return ResourceKey.create(Registries.CREATIVE_MODE_TAB,
+                Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, "ftl_group_core"));
     }
 
-    public static void registerModItemGroups() {
+    public static void bootstrap() {
         Registry.register(
-            Registries.ITEM_GROUP,
-            FTL_GROUP_CORE,
-            FabricItemGroup.builder()
-                .displayName(Text.translatable("itemGroup.ftlearning.ftl_group_core"))
-                .icon(() -> new ItemStack(ModItems.FIRST_ITEM))
-                .entries((display_context, entries) -> {
-                    entries.add(ModItems.FIRST_ITEM);
-                    entries.add(ModBlocks.FIRST_ITEM_BLOCK);
+                BuiltInRegistries.CREATIVE_MODE_TAB,
+                FTL_GROUP_CORE,
+                FabricItemGroup.builder()
+                        .title(Component.translatable("itemGroup.ftlearning.ftl_group_core"))
+                        .icon(() -> new ItemStack(ModItems.FIRST_ITEM))
+                        .displayItems((display_parameters, output) -> {
+                            output.accept(ModItems.FIRST_ITEM);
+                            output.accept(ModBlocks.FIRST_ITEM_BLOCK);
 
-                    entries.add(ModItems.PROSPECTOR);
-                    entries.add(ModItems.ADVANCED_PROSPECTOR);
-                    entries.add(ModItems.AR_GLASSES);
-                    entries.add(ModBlocks.THERAPEUTIC_TABLE);
+                            output.accept(ModItems.PROSPECTOR);
+                            output.accept(ModItems.ADVANCED_PROSPECTOR);
+                            output.accept(ModItems.AR_GLASSES);
+                            output.accept(ModBlocks.THERAPEUTIC_TABLE);
 
-                    entries.add(ModItems.INDUCTIVE_PREAMPLIFIER);
-                    entries.add(ModItems.ELECTRONIC_ESSENCE);
-                    entries.add(ModItems.ELECTRONIC_NUCLEUS_MATRIX);
-                    entries.add(ModItems.INSIGHT_ROD);
-                    entries.add(ModItems.CHROMOGENIC_LENS);
+                            output.accept(ModItems.INDUCTIVE_PREAMPLIFIER);
+                            output.accept(ModItems.ELECTRONIC_ESSENCE);
+                            output.accept(ModItems.ELECTRONIC_NUCLEUS_MATRIX);
+                            output.accept(ModItems.INSIGHT_ROD);
+                            output.accept(ModItems.CHROMOGENIC_LENS);
 
-                    entries.add(ModItems.NIGHT_VISION_GOLDEN_CARROT);
+                            output.accept(ModItems.NIGHT_VISION_GOLDEN_CARROT);
 
-                    entries.add(ModBlocks.VOIDABYSS_STONE);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_STAIRS);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_SLAB);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_WALL);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_FENCE);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_FENCE_GATE);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_BUTTON);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_DOOR);
-                    entries.add(ModBlocks.VOIDABYSS_STONE_TRAPDOOR);
+                            output.accept(ModBlocks.VOIDABYSS_STONE);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_STAIRS);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_SLAB);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_WALL);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_FENCE);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_FENCE_GATE);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_BUTTON);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_DOOR);
+                            output.accept(ModBlocks.VOIDABYSS_STONE_TRAPDOOR);
 
-                    entries.add(ModItems.VOIDABYSS_STONE_SWORD);
-                    entries.add(ModItems.VOIDABYSS_STONE_AXE);
-                    entries.add(ModItems.VOIDABYSS_STONE_PICKAXE);
-                    entries.add(ModItems.VOIDABYSS_STONE_SHOVEL);
-                    entries.add(ModItems.VOIDABYSS_STONE_HOE);
+                            output.accept(ModItems.VOIDABYSS_STONE_SWORD);
+                            output.accept(ModItems.VOIDABYSS_STONE_AXE);
+                            output.accept(ModItems.VOIDABYSS_STONE_PICKAXE);
+                            output.accept(ModItems.VOIDABYSS_STONE_SHOVEL);
+                            output.accept(ModItems.VOIDABYSS_STONE_HOE);
 
-                    entries.add(ModItems.VOIDABYSS_STONE_HELMET);
-                    entries.add(ModItems.VOIDABYSS_STONE_CHESTPLATE);
-                    entries.add(ModItems.VOIDABYSS_STONE_LEGGINGS);
-                    entries.add(ModItems.VOIDABYSS_STONE_BOOTS);
+                            output.accept(ModItems.VOIDABYSS_STONE_HELMET);
+                            output.accept(ModItems.VOIDABYSS_STONE_CHESTPLATE);
+                            output.accept(ModItems.VOIDABYSS_STONE_LEGGINGS);
+                            output.accept(ModItems.VOIDABYSS_STONE_BOOTS);
 
-                    entries.add(ModItems.SHUODEDAOLI);
-                    entries.add(ModBlocks.SHUODEDAOLI_BLOCK);
+                            output.accept(ModItems.SHUODEDAOLI);
+                            output.accept(ModBlocks.SHUODEDAOLI_BLOCK);
 
-                    entries.add(ModItems.DISC_FRAGMENT_GENERAL);
-                    entries.add(ModItems.MUSIC_DISC_IGOTSMOKE);
-                })
-                .build());
+                            output.accept(ModItems.DISC_FRAGMENT_GENERAL);
+                            output.accept(ModItems.MUSIC_DISC_IGOTSMOKE);
+                        })
+                        .build());
 
         Registry.register(
-            Registries.ITEM_GROUP,
-            FTL_GROUP_COMPRESSED,
-            FabricItemGroup.builder()
-                .displayName(Text.translatable("itemGroup.ftlearning.ftl_group_compressed"))
-                .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short)1)))
-                .entries((display_context, entries) -> {
-                    CompressedBlocks.registerItemGroupAll(entries);
-                })
-                .build());
+                BuiltInRegistries.CREATIVE_MODE_TAB,
+                FTL_GROUP_COMPRESSED,
+                FabricItemGroup.builder()
+                        .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
+                        .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
+                        .displayItems((display_parameters, output) -> {
+                            CompressedBlocks.registerItemGroupAll(output);
+                        })
+                        .build());
     }
 }

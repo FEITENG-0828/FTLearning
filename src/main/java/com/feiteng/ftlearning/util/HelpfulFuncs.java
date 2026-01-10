@@ -2,7 +2,10 @@ package com.feiteng.ftlearning.util;
 
 import com.feiteng.ftlearning.FTLearning;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -17,10 +20,10 @@ public class HelpfulFuncs {
         return FTLearning.MOD_ID + ':' + getSimpleIdStr(item_convertible);
     }
 
-    public static MutableText getTooltipMaskText(String key_name) {
-        return Text.translatable("item.ftlearning.tooltip_mask1").formatted(Formatting.AQUA)
-            .append(Text.literal(key_name.toUpperCase())
-                .formatted(Formatting.GOLD, Formatting.UNDERLINE))
-            .append(Text.translatable("item.ftlearning.tooltip_mask2").formatted(Formatting.AQUA));
+    public static MutableComponent getTooltipMaskText(String key_name) {
+        return Component.translatable("item.ftlearning.tooltip_mask1").withStyle(ChatFormatting.AQUA)
+            .append(Component.literal(key_name.toUpperCase())
+                .withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE))
+            .append(Component.translatable("item.ftlearning.tooltip_mask2").withStyle(ChatFormatting.AQUA));
     }
 }

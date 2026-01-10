@@ -1,84 +1,85 @@
 package com.feiteng.ftlearning.item.custom;
 
+import java.util.function.Consumer;
+
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.tag.ModBlockTags;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ProspectorItem extends Item {
     private static final int SEARCH_RADIUS = 64;
 
-    public ProspectorItem(Settings settings) {
-        super(settings);
+    public ProspectorItem(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        PlayerEntity player = context.getPlayer();
-        if (player == null) {
-            return ActionResult.PASS;
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        Player user = context.getPlayer();
+        if (user == null || level.isClientSide()) {
+            return InteractionResult.PASS;
         }
-        if (!world.isClient()) {
-            BlockPos block_pos = context.getBlockPos();
-            boolean has_found_block = false;
-            for (int i = SEARCH_RADIUS; i >= -SEARCH_RADIUS; --i) {
-                BlockPos check_pos = block_pos.up(i);
-                BlockState state = world.getBlockState(check_pos);
-                if (isRightBlock(state)) {
-                    has_found_block = true;
-                    player.sendMessage(Text.translatable(
-                        ModItems.PROSPECTOR.getTranslationKey() + ".use.success",
-                        state.getBlock().asItem().getName().getString(),
-                        check_pos.getX(), check_pos.getY(), check_pos.getZ()));
-                    world.playSound(null, block_pos,
-                        ModSoundEvents.ITEM_PROSPECTOR_USE_SUCCESS, player.getSoundCategory());
-                    break;
-                }
-            }
-            if (!has_found_block) {
-                player.sendMessage(Text.translatable(
-                    ModItems.PROSPECTOR.getTranslationKey() + ".use.failure"));
-                world.playSound(null, block_pos,
-                    ModSoundEvents.ITEM_PROSPECTOR_USE_FAILURE, player.getSoundCategory());
+
+        BlockPos block_pos = context.getClickedPos();
+        boolean has_found_block = false;
+        for (int i = SEARCH_RADIUS; i >= -SEARCH_RADIUS; --i) {
+            BlockPos check_pos = block_pos.above(i);
+            BlockState block_state = level.getBlockState(check_pos);
+            if (isRightBlock(block_state)) {
+                has_found_block = true;
+                user.displayClientMessage(Component.translatable(
+                        ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
+                        block_state.getBlock().getName(),
+                        check_pos.getX(), check_pos.getY(), check_pos.getZ()),
+                        true); // TODO: ?
+                level.playSound(user, user.blockPosition(),
+                        ModSoundEvents.ITEM_PROSPECTOR_USE_SUCCESS, user.getSoundSource());
+                break;
             }
         }
-        context.getStack().damage(1, player,
-            player_entity ->
-                player_entity.sendToolBreakStatus(player_entity.getActiveHand())
-        );
-        return ActionResult.SUCCESS;
+        if (!has_found_block) {
+            user.displayClientMessage(Component.translatable(
+                    ModItems.PROSPECTOR.getDescriptionId() + ".use.failure"),
+                    true); // TODO: ?
+            level.playSound(user, user.blockPosition(),
+                    ModSoundEvents.ITEM_PROSPECTOR_USE_FAILURE, user.getSoundSource());
+        }
+
+        context.getItemInHand().hurtAndBreak(1, user, context.getHand());
+        return InteractionResult.SUCCESS;
     }
 
-    private boolean isRightBlock(BlockState state) {
-        return state.isIn(ModBlockTags.PROSPECTING_LIST);
+    private boolean isRightBlock(BlockState block_state) {
+        return block_state.is(ModBlockTags.PROSPECTING_LIST);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world,
-                              List<Text> tooltip, TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
-        if (!Screen.hasShiftDown()) {
-            tooltip.add(HelpfulFuncs.getTooltipMaskText("shift"));
+    public void appendHoverText(
+            ItemStack stack, Item.TooltipContext context, TooltipDisplay display,
+            Consumer<Component> consumer, TooltipFlag flag) {
+        super.appendHoverText(stack, context, display, consumer, flag);
+
+        if (!stack.getEntityRepresentation().isShiftKeyDown()) {
+            consumer.accept(HelpfulFuncs.getTooltipMaskText("shift"));
         } else {
-            tooltip.add(Text.translatable(
-                ModItems.PROSPECTOR.getTranslationKey() + ".tooltip").formatted(Formatting.GRAY));
+            consumer.accept(Component.translatable(
+                    this.descriptionId + ".tooltip").withStyle(ChatFormatting.GRAY));
         }
     }
 }

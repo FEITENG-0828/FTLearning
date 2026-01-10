@@ -1,160 +1,143 @@
 package com.feiteng.ftlearning.item;
 
+import java.util.function.Function;
+
 import com.feiteng.ftlearning.FTLearning;
-import com.feiteng.ftlearning.item.custom.ArGlassesItem;
-import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
-import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
-import com.feiteng.ftlearning.sound.ModSoundEvents;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.EquipmentSlot;
-//import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-//import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.*;
-//import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.DiscFragmentItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.JukeboxSongs;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.equipment.ArmorType;
 
 public class ModItems {
     public static final Item FIRST_ITEM = register(
-        "first_item",
-        new Item(new FabricItemSettings())
-    );
+            "first_item",
+            Item::new, new Item.Properties());
 
     public static final Item PROSPECTOR = register(
-        "prospector",
-        new ProspectorItem(new FabricItemSettings()
-            .maxDamage(256))
-    );
+            "prospector",
+            ProspectorItem::new, new Item.Properties().durability(256));
 
     public static final Item INDUCTIVE_PREAMPLIFIER = register(
-        "inductive_preamplifier",
-        new Item(new FabricItemSettings())
-    );
+            "inductive_preamplifier",
+            Item::new, new Item.Properties());
 
     public static final Item NIGHT_VISION_GOLDEN_CARROT = register(
-        "night_vision_golden_carrot",
-        new Item(new FabricItemSettings()
-            .food(ModFoodComponents.NIGHT_VISION_GOLDEN_CARROT))
-    );
+            "night_vision_golden_carrot",
+            Item::new, new Item.Properties().food(ModFoodProperties.NIGHT_VISION_GOLDEN_CARROT,
+                    ModConsumables.NIGHT_VISION_GOLDEN_CARROT));
 
     public static final Item VOIDABYSS_STONE_SWORD = register(
-        "voidabyss_stone_sword",
-        new SwordItem(ModToolMaterials.VOIDABYSS_STONE,
-            3, -2.0f, new FabricItemSettings())
-    );
+            "voidabyss_stone_sword",
+            Item::new, new Item.Properties().sword(ModToolMaterials.VOIDABYSS_STONE, 3.0F, -2.0F));
 
     public static final Item VOIDABYSS_STONE_AXE = register(
-        "voidabyss_stone_axe",
-        new AxeItem(ModToolMaterials.VOIDABYSS_STONE,
-            6, -2.7f, new FabricItemSettings())
-    );
+            "voidabyss_stone_axe",
+            properties -> new AxeItem(ModToolMaterials.VOIDABYSS_STONE, 6.0F, -2.7F, properties),
+            new Item.Properties());
 
     public static final Item VOIDABYSS_STONE_PICKAXE = register(
-        "voidabyss_stone_pickaxe",
-        new PickaxeItem(ModToolMaterials.VOIDABYSS_STONE,
-            1, -2.4f, new FabricItemSettings())
-    );
+            "voidabyss_stone_pickaxe",
+            Item::new, new Item.Properties().pickaxe(ModToolMaterials.VOIDABYSS_STONE, 1.0F, -2.4F));
 
     public static final Item VOIDABYSS_STONE_SHOVEL = register(
-        "voidabyss_stone_shovel",
-        new ShovelItem(ModToolMaterials.VOIDABYSS_STONE,
-            1.5f, -2.6f, new FabricItemSettings())
-    );
+            "voidabyss_stone_shovel",
+            properties -> new ShovelItem(ModToolMaterials.VOIDABYSS_STONE, 1.5F, -2.6F, properties),
+            new Item.Properties());
 
     public static final Item VOIDABYSS_STONE_HOE = register(
-        "voidabyss_stone_hoe",
-        new HoeItem(ModToolMaterials.VOIDABYSS_STONE,
-            -1, -0.6f, new FabricItemSettings())
-    );
+            "voidabyss_stone_hoe",
+            properties -> new HoeItem(ModToolMaterials.VOIDABYSS_STONE, -1.0F, -0.6F, properties),
+            new Item.Properties());
 
     public static final Item VOIDABYSS_STONE_HELMET = register(
-        "voidabyss_stone_helmet",
-        new ModArmorItem(ModArmorMaterials.VOIDABYSS_STONE,
-            ArmorItem.Type.HELMET, new FabricItemSettings())
-    );
+            "voidabyss_stone_helmet",
+            Item::new, // TODO: ModArmorItem, full armor effects
+            new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.HELMET));
 
     public static final Item VOIDABYSS_STONE_CHESTPLATE = register(
-        "voidabyss_stone_chestplate",
-        new ModArmorItem(ModArmorMaterials.VOIDABYSS_STONE,
-            ArmorItem.Type.CHESTPLATE, new FabricItemSettings())
-    );
+            "voidabyss_stone_chestplate",
+            Item::new, // TODO: ModArmorItem, full armor effects
+            new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.CHESTPLATE));
 
     public static final Item VOIDABYSS_STONE_LEGGINGS = register(
-        "voidabyss_stone_leggings",
-        new ModArmorItem(ModArmorMaterials.VOIDABYSS_STONE,
-            ArmorItem.Type.LEGGINGS, new FabricItemSettings())
-    );
+            "voidabyss_stone_leggings",
+            Item::new, // TODO: ModArmorItem, full armor effects
+            new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.LEGGINGS));
 
     public static final Item VOIDABYSS_STONE_BOOTS = register(
-        "voidabyss_stone_boots",
-        new ModArmorItem(ModArmorMaterials.VOIDABYSS_STONE,
-            ArmorItem.Type.BOOTS, new FabricItemSettings())
-    );
+            "voidabyss_stone_boots",
+            Item::new, // TODO: ModArmorItem, full armor effects
+            new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.BOOTS));
+    // TODO: 纹理, 装备模型定义
+    // https://docs.fabricmc.net/develop/items/custom-armor#textures-and-models
 
     public static final Item SHUODEDAOLI = register(
-        "shuodedaoli",
-        new Item(new FabricItemSettings())
-    );
+            "shuodedaoli",
+            Item::new, new Item.Properties());
 
     public static final Item DISC_FRAGMENT_GENERAL = register(
-        "disc_fragment_general",
-        new DiscFragmentItem(new FabricItemSettings())
-    );
+            "disc_fragment_general",
+            DiscFragmentItem::new, new Item.Properties()); // TODO: .rarity(Rarity.UNCOMMON) ?
 
     public static final Item MUSIC_DISC_IGOTSMOKE = register(
-        "music_disc_igotsmoke",
-        new MusicDiscItem(1, ModSoundEvents.MUSIC_DISC_IGOTSMOKE,
-            new FabricItemSettings().maxCount(1).rarity(Rarity.RARE), 246)
-    );
+            "music_disc_igotsmoke",
+            Item::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
+                    .jukeboxPlayable(JukeboxSongs.OTHERSIDE));
+    // new MusicDiscItem(1, ModSoundEvents.MUSIC_DISC_IGOTSMOKE, TODO
+    // new FabricItemSettings().maxCount(1).rarity(Rarity.RARE), 246));
 
     public static final Item ADVANCED_PROSPECTOR = register(
-        "advanced_prospector",
-        new AdvancedProspectorItem(new FabricItemSettings()
-            .maxDamage(64))
-    );
+            "advanced_prospector",
+            Item::new, new Item.Properties().durability(64)); // TODO: AdvancedProspectorItem
 
     public static final Item AR_GLASSES = register(
-        "ar_glasses",
-        new ArGlassesItem(new FabricItemSettings()
-            .maxDamage(64)
-            .equipmentSlot(stack -> EquipmentSlot.HEAD))
-    );
+            "ar_glasses",
+            Item::new, new Item.Properties().durability(64) // TODO: ArGlassesItem
+                    .equipmentSlot((entity, stack) -> EquipmentSlot.HEAD));
 
     public static final Item ELECTRONIC_ESSENCE = register(
-        "electronic_essence",
-        new Item(new FabricItemSettings())
-    );
+            "electronic_essence",
+            Item::new, new Item.Properties());
 
     public static final Item ELECTRONIC_NUCLEUS_MATRIX = register(
-        "electronic_nucleus_matrix",
-        new Item(new FabricItemSettings())
-    );
+            "electronic_nucleus_matrix",
+            Item::new, new Item.Properties());
 
     public static final Item INSIGHT_ROD = register(
-        "insight_rod",
-        new Item(new FabricItemSettings())
-    );
+            "insight_rod",
+            Item::new, new Item.Properties());
 
     public static final Item CHROMOGENIC_LENS = register(
-        "chromogenic_lens",
-        new Item(new FabricItemSettings())
-    );
+            "chromogenic_lens",
+            Item::new, new Item.Properties());
 
-    private static Item register(String name, Item item) {
-        return Registry.register(Registries.ITEM,
-            new Identifier(FTLearning.MOD_ID, name),
-            item);
+    public static Item register(String name,
+            Function<Item.Properties, Item> func, Item.Properties properties) {
+        ResourceKey<Item> item_key = ResourceKey.create(Registries.ITEM,
+                Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, name));
+        Item item = (Item) func.apply(properties.setId(item_key));
+        Registry.register(BuiltInRegistries.ITEM, item_key, item);
+        return item;
     }
+    // TODO: 物品模型描述
+    // https://docs.fabricmc.net/zh_cn/develop/items/first-item#creating-the-item-model-description
+    // TODO: 合成配方路径
+    // https://docs.fabricmc.net/zh_cn/develop/items/first-item#adding-a-basic-crafting-recipe
 
-//    private static void addItemsToItemGroup(FabricItemGroupEntries fabric_item_group_entries) {
-//        fabric_item_group_entries.add(FIRST_ITEM);
-//    }
-
-    public static void registerModItems() {
-//        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL)
-//            .register(ModItems::addItemsToItemGroup);
+    public static void bootstrap() {
+        // ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
+        // .register(item_group -> item_group.accept(ModItems.FIRST_ITEM));
     }
 }

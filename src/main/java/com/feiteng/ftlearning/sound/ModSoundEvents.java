@@ -1,10 +1,11 @@
 package com.feiteng.ftlearning.sound;
 
 import com.feiteng.ftlearning.FTLearning;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 
 public class ModSoundEvents {
     public static final SoundEvent ITEM_PROSPECTOR_USE_SUCCESS =
@@ -31,6 +32,6 @@ public class ModSoundEvents {
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 
-    public static void registerModSoundEvents() {
+    public static void bootstrap() {
     }
 }

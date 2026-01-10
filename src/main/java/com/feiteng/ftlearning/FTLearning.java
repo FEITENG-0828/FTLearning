@@ -12,6 +12,7 @@ import com.feiteng.ftlearning.sound.ModSoundEvents;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.item.ItemStack;
@@ -35,13 +36,17 @@ public class FTLearning implements ModInitializer {
 
         // LOGGER.info("Hello Fabric world!");
 
-        ModBlocks.registerModBlocks();
-        ModItems.registerModItems();
-        ModItemGroups.registerModItemGroups();
-        ModSoundEvents.registerModSoundEvents();
+        ModBlocks.bootstrap();
+        ModItems.bootstrap();
+        ModItemGroups.bootstrap();
+        ModSoundEvents.bootstrap();
 
-        FuelRegistry.INSTANCE.add(ModItems.FIRST_ITEM, 3200);
-        FuelRegistry.INSTANCE.add(ModBlocks.FIRST_ITEM_BLOCK, 32000);
+        FuelRegistryEvents.BUILD.register((builder, context) -> {
+            builder.add(ModItems.FIRST_ITEM, 160 * 20);
+        });
+        FuelRegistryEvents.BUILD.register((builder, context) -> {
+            builder.add(ModItems.FIRST_ITEM_BLOCK, 1600 * 20);
+        });
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             if (entity instanceof ServerPlayerEntity player)
