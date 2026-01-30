@@ -2,7 +2,7 @@ package com.feiteng.ftlearning.item;
 
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
+// import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
@@ -13,7 +13,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
+// import net.minecraft.world.level.block.Blocks;
 
 public class ModItemGroups {
     public static final ResourceKey<CreativeModeTab> FTL_GROUP_CORE = createKey("ftl_group_core");
@@ -78,15 +78,15 @@ public class ModItemGroups {
                         })
                         .build());
 
-        Registry.register(
-                BuiltInRegistries.CREATIVE_MODE_TAB,
-                FTL_GROUP_COMPRESSED,
-                FabricItemGroup.builder()
-                        .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
-                        .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
-                        .displayItems((display_parameters, output) -> {
-                            CompressedBlocks.registerItemGroupAll(output);
-                        })
-                        .build());
+        // Registry.register(
+        //         BuiltInRegistries.CREATIVE_MODE_TAB,
+        //         FTL_GROUP_COMPRESSED,
+        //         FabricItemGroup.builder()
+        //                 .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
+        //                 .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
+        //                 .displayItems((display_parameters, output) -> {
+        //                     CompressedBlocks.registerItemGroupAll(output);
+        //                 })
+        //                 .build());
     }
 }

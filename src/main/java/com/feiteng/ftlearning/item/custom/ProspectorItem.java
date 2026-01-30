@@ -75,7 +75,7 @@ public class ProspectorItem extends Item {
             Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
 
-        if (!stack.getEntityRepresentation().isShiftKeyDown()) {
+        if (!stack.getEntityRepresentation().isShiftKeyDown()) { // TODO: test change shift key
             consumer.accept(HelpfulFuncs.getTooltipMaskText("shift"));
         } else {
             consumer.accept(Component.translatable(

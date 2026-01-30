@@ -1,27 +1,27 @@
 package com.feiteng.ftlearning.block.custom;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class TherapeuticTableBlock extends Block {
-    public TherapeuticTableBlock(Settings settings) {
-        super(settings);
+    public TherapeuticTableBlock(BlockBehaviour.Properties properties) {
+        super(properties);
     }
 
     @Override
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        super.onSteppedOn(world, pos, state, entity);
-        if (!world.isClient &&
-            entity instanceof PlayerEntity player &&
-            world.getTime() % 50 == 0) {
-            player.addStatusEffect(new StatusEffectInstance(
-                StatusEffects.REGENERATION, 120, 0));
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        super.stepOn(level, pos, state, entity);
+        if (!level.isClientSide() &&
+                entity instanceof LivingEntity living_entity &&
+                level.getLevelData().getGameTime() % 50 == 0) {
+            living_entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 120, 0));
         }
     }
 }

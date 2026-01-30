@@ -1,24 +1,27 @@
 package com.feiteng.ftlearning.datagen;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.core.HolderLookup;
 
 public class ModEnUsLangProvider extends FabricLanguageProvider {
     public String language_code;
 
-    public ModEnUsLangProvider(FabricDataOutput dataOutput) {
-        super(dataOutput, "en_us");
+    public ModEnUsLangProvider(FabricDataOutput data_output,
+            CompletableFuture<HolderLookup.Provider> registry_lookup) {
+        super(data_output, "en_us", registry_lookup);
         this.language_code = "en_us";
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder builder) {
+    public void generateTranslations(HolderLookup.Provider lookup, TranslationBuilder builder) {
         builder.add(ModItems.FIRST_ITEM, "First Item");
         builder.add(ModBlocks.FIRST_ITEM_BLOCK, "First Item Block");
 
@@ -29,27 +32,27 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add("item.ftlearning.tooltip_mask2", " for more information");
 
         builder.add(ModItems.PROSPECTOR, "Prospector");
-        builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".tooltip",
-            "Right click on the block to detect precious ores"
-            + " within the upper and lower 64 blocks");
-        builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".use.success",
-            "%1$s was found at (%2$s, %3$s, %4$s)");
-        builder.add(ModItems.PROSPECTOR.getTranslationKey() + ".use.failure",
-            "No Ore Found");
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".tooltip",
+                "Right click on the block to detect precious ores"
+                        + " within the upper and lower 64 blocks");
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
+                "%1$s was found at (%2$s, %3$s, %4$s)");
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".use.failure",
+                "No Ore Found");
 
         builder.add(ModItems.ADVANCED_PROSPECTOR, "Advanced Prospector");
-        builder.add(ModItems.ADVANCED_PROSPECTOR.getTranslationKey() + ".tooltip",
-            "Right click to scan precious ores within "
-            + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
-            + '*' + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
-            + " chunks around you");
-        builder.add(ModItems.ADVANCED_PROSPECTOR.getTranslationKey() + ".use.done",
-            "Scan completed");
+        builder.add(ModItems.ADVANCED_PROSPECTOR.getDescriptionId() + ".tooltip",
+                "Right click to scan precious ores within "
+                        + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
+                        + '*' + (1 + AdvancedProspectorItem.SCAN_CHUNK_RADIUS * 2)
+                        + " chunks around you");
+        builder.add(ModItems.ADVANCED_PROSPECTOR.getDescriptionId() + ".use.done",
+                "Scan completed");
 
         builder.add("subtitles.ftlearning.item.prospector.use.success",
-        "Ores detected");
+                "Ores detected");
         builder.add("subtitles.ftlearning.item.prospector.use.failure",
-        "No ore detected");
+                "No ore detected");
 
         builder.add(ModItems.AR_GLASSES, "AR Glasses");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "Therapeutic Table");
@@ -88,12 +91,12 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModBlocks.SHUODEDAOLI_BLOCK, "ShuoDeDaoLi Block");
 
         builder.add(ModItems.DISC_FRAGMENT_GENERAL, "Disc Fragment");
-        builder.add(ModItems.DISC_FRAGMENT_GENERAL.getTranslationKey() + ".desc",
-            "Song unstored");
+        builder.add(ModItems.DISC_FRAGMENT_GENERAL.getDescriptionId() + ".desc",
+                "Song unstored");
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE, "Music Disc");
-        builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getTranslationKey() + ".desc",
-            "Venoflame - I Got Smoke (Explicit Ver.)");
+        builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getDescriptionId() + ".desc",
+                "Venoflame - I Got Smoke (Explicit Ver.)");
 
-        CompressedBlocks.translateAll(builder, this.language_code);
+        // CompressedBlocks.translateAll(builder, this.language_code);
     }
 }
