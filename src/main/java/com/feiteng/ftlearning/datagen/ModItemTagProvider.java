@@ -12,9 +12,9 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
-    public ModItemTagProvider(FabricDataOutput output,
-            CompletableFuture<HolderLookup.Provider> future) {
-        super(output, future);
+    public ModItemTagProvider(FabricDataOutput data_output,
+            CompletableFuture<HolderLookup.Provider> lookup) {
+        super(data_output, lookup);
     }
 
     @Override

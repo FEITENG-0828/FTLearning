@@ -12,9 +12,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput output,
-            CompletableFuture<HolderLookup.Provider> future) {
-        super(output, future);
+    public ModBlockTagProvider(FabricDataOutput data_output,
+            CompletableFuture<HolderLookup.Provider> lookup) {
+        super(data_output, lookup);
     }
 
     @Override

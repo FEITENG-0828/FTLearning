@@ -15,8 +15,8 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
     public String language_code;
 
     public ModEnUsLangProvider(FabricDataOutput data_output,
-            CompletableFuture<HolderLookup.Provider> registry_lookup) {
-        super(data_output, "en_us", registry_lookup);
+            CompletableFuture<HolderLookup.Provider> lookup) {
+        super(data_output, "en_us", lookup);
         this.language_code = "en_us";
     }
 

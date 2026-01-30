@@ -19,7 +19,8 @@ classes/
 # vscode
 
 .settings/
-.vscode/
+.vscode**/
+.histroy/
 bin/
 *.code-workspace
 .classpath

@@ -17,8 +17,8 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Blocks;
 
 public class ModModelProvider extends FabricModelProvider {
-    public ModModelProvider(FabricDataOutput output) {
-        super(output);
+    public ModModelProvider(FabricDataOutput data_output) {
+        super(data_output);
     }
 
     @Override

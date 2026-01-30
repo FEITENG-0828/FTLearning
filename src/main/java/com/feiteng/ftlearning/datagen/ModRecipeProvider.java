@@ -6,36 +6,26 @@ import org.jetbrains.annotations.Nullable;
 
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.data.server.recipe.RecipeExporter;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SingleItemRecipeJsonBuilder;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
-    public ModRecipeProvider(FabricDataOutput output,
-            CompletableFuture<HolderLookup.Provider> future) {
-        super(output, future);
+    public ModRecipeProvider(FabricDataOutput data_output,
+            CompletableFuture<HolderLookup.Provider> lookup) {
+        super(data_output, lookup);
     }
 
     @Override
@@ -44,11 +34,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookup, RecipeOutput output) {
-        return new RecipeProvider(lookup, output) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookup, RecipeOutput recipe_output) {
+        return new RecipeProvider(lookup, recipe_output) {
             @Override
             public void buildRecipes() {
-                SimpleCookingRecipeBuilder.generic(Ingredient.of(Items.ROTTEN_FLESH),
+                SimpleCookingRecipeBuilder.generic(Ingredient.of(Items.ROTTEN_FLESH), // smelting ?
                         RecipeCategory.MISC, Items.LEATHER, // TODO: check cooking book tab
                         0.2F, 200,
                         RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
@@ -68,8 +58,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Items.LAPIS_LAZULI))
                         .save(output);
 
-                offerReversibleCompactingRecipes(output,
-                        RecipeCategory.MISC, ModItems.FIRST_ITEM,
+                nineBlockStorageRecipes(RecipeCategory.MISC, ModItems.FIRST_ITEM,
                         RecipeCategory.BUILDING_BLOCKS, ModBlocks.FIRST_ITEM_BLOCK,
                         getModRecipeName(ModBlocks.FIRST_ITEM_BLOCK, "from",
                                 ModItems.FIRST_ITEM, null),
@@ -96,17 +85,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModItems.FIRST_ITEM), has(ModItems.FIRST_ITEM))
                         .save(output);
 
-                shaped(RecipeCategory.TOOLS, ModItems.ADVANCED_PROSPECTOR, 1)
-                        .define('I', ModItems.INSIGHT_ROD)
-                        .define('F', ModBlocks.FIRST_ITEM_BLOCK)
-                        .define('E', ModItems.ELECTRONIC_NUCLEUS_MATRIX)
-                        .define('L', CompressedBlocks.getBlock(Blocks.LAPIS_BLOCK, (short) 1))
-                        .pattern("I I")
-                        .pattern("FEF")
-                        .pattern("LFL")
-                        .unlockedBy(getHasName(ModItems.ELECTRONIC_NUCLEUS_MATRIX),
-                                has(ModItems.ELECTRONIC_NUCLEUS_MATRIX))
-                        .save(output);
+                // shaped(RecipeCategory.TOOLS, ModItems.ADVANCED_PROSPECTOR, 1)
+                // .define('I', ModItems.INSIGHT_ROD)
+                // .define('F', ModBlocks.FIRST_ITEM_BLOCK)
+                // .define('E', ModItems.ELECTRONIC_NUCLEUS_MATRIX)
+                // .define('L', CompressedBlocks.getBlock(Blocks.LAPIS_BLOCK, (short) 1))
+                // .pattern("I I")
+                // .pattern("FEF")
+                // .pattern("LFL")
+                // .unlockedBy(getHasName(ModItems.ELECTRONIC_NUCLEUS_MATRIX),
+                // has(ModItems.ELECTRONIC_NUCLEUS_MATRIX))
+                // .save(output);
 
                 shaped(RecipeCategory.TOOLS, ModItems.AR_GLASSES, 1)
                         .define('C', Items.COPPER_INGOT)
@@ -154,6 +143,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.CALIBRATED_SCULK_SENSOR),
                                 has(Items.CALIBRATED_SCULK_SENSOR))
                         .save(output);
+
                 shaped(RecipeCategory.MISC, ModItems.ELECTRONIC_NUCLEUS_MATRIX, 1)
                         .define('G', Items.GOLD_BLOCK)
                         .define('A', Items.AMETHYST_SHARD)
@@ -197,68 +187,43 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.GOLDEN_CARROT), has(Items.GOLDEN_CARROT))
                         .save(output);
 
-                createStairsRecipe(ModBlocks.VOIDABYSS_STONE_STAIRS, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
+                stairBuilder(ModBlocks.VOIDABYSS_STONE_STAIRS, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
+                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
+                        .save(output);
+                stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS,
+                        ModBlocks.VOIDABYSS_STONE_STAIRS, ModBlocks.VOIDABYSS_STONE, 1);
+
+                slab(RecipeCategory.BUILDING_BLOCKS,
+                        ModBlocks.VOIDABYSS_STONE_SLAB, ModBlocks.VOIDABYSS_STONE);
+                stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS,
+                        ModBlocks.VOIDABYSS_STONE_SLAB, ModBlocks.VOIDABYSS_STONE, 2);
+
+                wall(RecipeCategory.DECORATIONS,
+                        ModBlocks.VOIDABYSS_STONE_WALL, ModBlocks.VOIDABYSS_STONE);
+                stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS,
+                        ModBlocks.VOIDABYSS_STONE_WALL, ModBlocks.VOIDABYSS_STONE, 1);
+
+                fenceBuilder(ModBlocks.VOIDABYSS_STONE_FENCE, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                SingleItemRecipeJsonBuilder
-                        .createStonecutting(Ingredient.of(ModBlocks.VOIDABYSS_STONE),
-                                RecipeCategory.BUILDING_BLOCKS, ModBlocks.VOIDABYSS_STONE_STAIRS, 1)
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output, getModRecipeName(
-                                ModBlocks.VOIDABYSS_STONE_STAIRS, "from",
-                                ModBlocks.VOIDABYSS_STONE, "stonecutting"));
-
-                createSlabRecipe(RecipeCategory.BUILDING_BLOCKS,
-                        ModBlocks.VOIDABYSS_STONE_SLAB, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output);
-
-                SingleItemRecipeJsonBuilder
-                        .createStonecutting(Ingredient.of(ModBlocks.VOIDABYSS_STONE),
-                                RecipeCategory.BUILDING_BLOCKS, ModBlocks.VOIDABYSS_STONE_SLAB, 2)
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output, getModRecipeName(
-                                ModBlocks.VOIDABYSS_STONE_SLAB, "from",
-                                ModBlocks.VOIDABYSS_STONE, "stonecutting"));
-
-                getWallRecipe(RecipeCategory.BUILDING_BLOCKS,
-                        ModBlocks.VOIDABYSS_STONE_WALL, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output);
-
-                SingleItemRecipeJsonBuilder
-                        .createStonecutting(Ingredient.of(ModBlocks.VOIDABYSS_STONE),
-                                RecipeCategory.BUILDING_BLOCKS, ModBlocks.VOIDABYSS_STONE_WALL, 1)
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output, getModRecipeName(
-                                ModBlocks.VOIDABYSS_STONE_WALL, "from",
-                                ModBlocks.VOIDABYSS_STONE, "stonecutting"));
-
-                createFenceRecipe(ModBlocks.VOIDABYSS_STONE_FENCE, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output);
-
-                createFenceGateRecipe(ModBlocks.VOIDABYSS_STONE_FENCE_GATE,
+                fenceGateBuilder(ModBlocks.VOIDABYSS_STONE_FENCE_GATE,
                         Ingredient.of(ModBlocks.VOIDABYSS_STONE))
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                createTransmutationRecipe(ModBlocks.VOIDABYSS_STONE_BUTTON,
+                buttonBuilder(ModBlocks.VOIDABYSS_STONE_BUTTON,
                         Ingredient.of(ModBlocks.VOIDABYSS_STONE))
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                createPressurePlateRecipe(RecipeCategory.REDSTONE,
-                        ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
+                pressurePlate(ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE, ModBlocks.VOIDABYSS_STONE);
+
+                doorBuilder(ModBlocks.VOIDABYSS_STONE_DOOR, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                createDoorRecipe(ModBlocks.VOIDABYSS_STONE_DOOR, Ingredient.of(ModBlocks.VOIDABYSS_STONE))
-                        .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
-                        .save(output);
-
-                offer2x2CompactingRecipe(output, RecipeCategory.REDSTONE,
+                twoByTwoPacker(RecipeCategory.REDSTONE,
                         ModBlocks.VOIDABYSS_STONE_TRAPDOOR, ModBlocks.VOIDABYSS_STONE);
 
                 shaped(RecipeCategory.COMBAT, ModItems.VOIDABYSS_STONE_SWORD)
@@ -306,10 +271,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                SimpleCookingRecipeBuilder.create(Ingredient.of(Items.SADDLE),
-                        RecipeCategory.MISC, Items.LEATHER,
+                SimpleCookingRecipeBuilder.generic(Ingredient.of(Items.SADDLE), // smelting ?
+                        RecipeCategory.MISC, Items.LEATHER, // TODO: check cooking book tab
                         25.0f, 300,
-                        RecipeSerializer.SMELTING, SmeltingRecipe::new)
+                        RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
                         .unlockedBy(getHasName(Items.SADDLE), has(Items.SADDLE))
                         .save(output, getModRecipeName(
                                 Items.LEATHER, "from_smelting",
@@ -321,6 +286,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("V V")
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
+
                 shaped(RecipeCategory.COMBAT, ModItems.VOIDABYSS_STONE_CHESTPLATE)
                         .define('V', ModBlocks.VOIDABYSS_STONE)
                         .pattern("V V")
@@ -328,6 +294,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("VVV")
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
+
                 shaped(RecipeCategory.COMBAT, ModItems.VOIDABYSS_STONE_LEGGINGS)
                         .define('V', ModBlocks.VOIDABYSS_STONE)
                         .pattern("VVV")
@@ -335,6 +302,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .pattern("V V")
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
+
                 shaped(RecipeCategory.COMBAT, ModItems.VOIDABYSS_STONE_BOOTS)
                         .define('V', ModBlocks.VOIDABYSS_STONE)
                         .pattern("V V")
@@ -342,8 +310,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                offerReversibleCompactingRecipes(output,
-                        RecipeCategory.MISC, ModItems.SHUODEDAOLI,
+                nineBlockStorageRecipes(RecipeCategory.MISC, ModItems.SHUODEDAOLI,
                         RecipeCategory.MISC, ModBlocks.SHUODEDAOLI_BLOCK,
                         getModRecipeName(ModBlocks.SHUODEDAOLI_BLOCK, "from",
                                 ModItems.SHUODEDAOLI, null),
@@ -352,35 +319,36 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                                 ModBlocks.SHUODEDAOLI_BLOCK, null),
                         getItemName(ModItems.SHUODEDAOLI));
 
-                CompressedBlocks.generateRecipeAll(output);
+                // CompressedBlocks.generateRecipeAll(output);
 
-                shaped(RecipeCategory.MISC, Items.GHAST_TEAR, 1)
-                        .define('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1))
-                        .define('F', ModItems.FIRST_ITEM)
-                        .group(getItemName(Items.GHAST_TEAR))
-                        .pattern("SSS")
-                        .pattern("SFS")
-                        .pattern("SSS")
-                        .unlockedBy(getHasName(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1)),
-                                has(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1)))
-                        .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.GHAST_TEAR));
+                // shaped(RecipeCategory.MISC, Items.GHAST_TEAR, 1)
+                //         .define('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1))
+                //         .define('F', ModItems.FIRST_ITEM)
+                //         .group(getItemName(Items.GHAST_TEAR))
+                //         .pattern("SSS")
+                //         .pattern("SFS")
+                //         .pattern("SSS")
+                //         .unlockedBy(getHasName(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1)),
+                //                 has(CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 1)))
+                //         .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.GHAST_TEAR));
 
-                shaped(RecipeCategory.MISC, Items.NETHER_STAR, 2)
-                        .define('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 2))
-                        .define('F', ModBlocks.FIRST_ITEM_BLOCK)
-                        .define('N', Items.NETHER_STAR)
-                        .group(getItemName(Items.NETHER_STAR))
-                        .pattern("FSF")
-                        .pattern("SNS")
-                        .pattern("FSF")
-                        .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
-                        .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.NETHER_STAR));
+                // shaped(RecipeCategory.MISC, Items.NETHER_STAR, 2)
+                //         .define('S', CompressedBlocks.getBlock(Blocks.SOUL_SAND, (short) 2))
+                //         .define('F', ModBlocks.FIRST_ITEM_BLOCK)
+                //         .define('N', Items.NETHER_STAR)
+                //         .group(getItemName(Items.NETHER_STAR))
+                //         .pattern("FSF")
+                //         .pattern("SNS")
+                //         .pattern("FSF")
+                //         .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
+                //         .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.NETHER_STAR));
 
-                ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DISC_FRAGMENT_GENERAL, 9)
-                        .define(ItemTags.MUSIC_DISCS)
-                        .group(getItemName(ModItems.DISC_FRAGMENT_GENERAL))
-                        .unlockedBy("has_music_discs", conditionsFromTag(ItemTags.MUSIC_DISCS))
-                        .save(output);
+                // TODO
+                // shapeless(RecipeCategory.MISC, ModItems.DISC_FRAGMENT_GENERAL, 9)
+                //         .requires(ItemTags.MUSIC_DISCS)
+                //         .group(getItemName(ModItems.DISC_FRAGMENT_GENERAL))
+                //         .unlockedBy("has_music_discs", conditionsFromTag(ItemTags.MUSIC_DISCS))
+                //         .save(output);
 
                 shaped(RecipeCategory.MISC, Items.DISC_FRAGMENT_5, 1)
                         .define('S', Items.SCULK)

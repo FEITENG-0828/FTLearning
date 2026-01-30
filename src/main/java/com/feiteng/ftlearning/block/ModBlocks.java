@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -57,8 +58,8 @@ public class ModBlocks {
 
     public static final Block VOIDABYSS_STONE_WALL = register(
             "voidabyss_stone_wall",
-            SlabBlock::new,
-            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE).forceSolidOn()); // TODO: what is forceSolidOn
+            WallBlock::new,
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE).forceSolidOn()); // TODO: forceSolidOn
 
     public static final Block VOIDABYSS_STONE_FENCE = register(
             "voidabyss_stone_fence",
@@ -67,7 +68,7 @@ public class ModBlocks {
 
     public static final Block VOIDABYSS_STONE_FENCE_GATE = register(
             "voidabyss_stone_fence_gate",
-            properties -> new FenceGateBlock(WoodType.OAK, properties), // TODO: WoodType.OAK
+            properties -> new FenceGateBlock(WoodType.WARPED, properties), // TODO: WoodType.WARPED
             BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE));
 
     public static final Block VOIDABYSS_STONE_BUTTON = register(

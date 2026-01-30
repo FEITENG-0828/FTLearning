@@ -21,7 +21,7 @@ public class ModItemGroups {
 
     private static ResourceKey<CreativeModeTab> createKey(String id) {
         return ResourceKey.create(Registries.CREATIVE_MODE_TAB,
-                Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, "ftl_group_core"));
+                Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, id));
     }
 
     public static void bootstrap() {
@@ -78,15 +78,18 @@ public class ModItemGroups {
                         })
                         .build());
 
-        // Registry.register(
-        //         BuiltInRegistries.CREATIVE_MODE_TAB,
-        //         FTL_GROUP_COMPRESSED,
-        //         FabricItemGroup.builder()
-        //                 .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
-        //                 .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
-        //                 .displayItems((display_parameters, output) -> {
-        //                     CompressedBlocks.registerItemGroupAll(output);
-        //                 })
-        //                 .build());
+        // FIXME
+        Registry.register(
+                BuiltInRegistries.CREATIVE_MODE_TAB,
+                FTL_GROUP_COMPRESSED,
+                FabricItemGroup.builder()
+                        .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
+                        .icon(() -> new ItemStack(ModItems.NIGHT_VISION_GOLDEN_CARROT))
+                        // .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
+                        .displayItems((display_parameters, output) -> {
+                            // CompressedBlocks.registerItemGroupAll(output);
+                            output.accept(ModItems.SHUODEDAOLI);
+                        })
+                        .build());
     }
 }
