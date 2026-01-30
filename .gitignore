@@ -20,7 +20,7 @@ classes/
 
 .settings/
 .vscode**/
-.histroy/
+.history/
 bin/
 *.code-workspace
 .classpath
