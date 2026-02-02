@@ -104,8 +104,6 @@ public class ModBlocks {
             BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT));
     // .sound(ModBlockSoundGroups.SHUODEDAOLI_BLOCK)); TODO
 
-    // TODO: 物品模型描述, 战利品表路径, 挖掘工具路径, 挖掘等级路径
-
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {
         ResourceKey<Block> block_key = ResourceKey.create(Registries.BLOCK,

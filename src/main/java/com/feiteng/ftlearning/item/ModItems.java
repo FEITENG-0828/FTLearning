@@ -80,8 +80,6 @@ public class ModItems {
             "voidabyss_stone_boots",
             Item::new, // TODO: ModArmorItem, full armor effects
             new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.BOOTS));
-    // TODO: 纹理, 装备模型定义
-    // https://docs.fabricmc.net/develop/items/custom-armor#textures-and-models
 
     public static final Item SHUODEDAOLI = register(
             "shuodedaoli",
@@ -131,10 +129,6 @@ public class ModItems {
         Registry.register(BuiltInRegistries.ITEM, item_key, item);
         return item;
     }
-    // TODO: 物品模型描述
-    // https://docs.fabricmc.net/zh_cn/develop/items/first-item#creating-the-item-model-description
-    // TODO: 合成配方路径
-    // https://docs.fabricmc.net/zh_cn/develop/items/first-item#adding-a-basic-crafting-recipe
 
     public static void bootstrap() {
         // ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)

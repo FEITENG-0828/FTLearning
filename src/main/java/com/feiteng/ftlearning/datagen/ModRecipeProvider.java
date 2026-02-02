@@ -30,7 +30,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public String getName() {
-        return "ModRecipeProvider";
+        return "Mod Recipes";
     }
 
     @Override

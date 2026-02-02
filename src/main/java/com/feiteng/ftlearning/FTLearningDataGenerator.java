@@ -12,6 +12,7 @@ public class FTLearningDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModBlockTagProvider::new);
         pack.addProvider(ModItemTagProvider::new);
         pack.addProvider(ModBlockLootTableProvider::new);
+        pack.addProvider(ModEquipmentAssetProvider::new);
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModEnUsLangProvider::new);
