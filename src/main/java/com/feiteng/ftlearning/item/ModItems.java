@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.item;
 import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
 
 import net.minecraft.core.Registry;
@@ -63,22 +64,22 @@ public class ModItems {
 
     public static final Item VOIDABYSS_STONE_HELMET = register(
             "voidabyss_stone_helmet",
-            Item::new, // TODO: ModArmorItem, full armor effects
+            ModArmorItem::new,
             new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.HELMET));
 
     public static final Item VOIDABYSS_STONE_CHESTPLATE = register(
             "voidabyss_stone_chestplate",
-            Item::new, // TODO: ModArmorItem, full armor effects
+            ModArmorItem::new,
             new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.CHESTPLATE));
 
     public static final Item VOIDABYSS_STONE_LEGGINGS = register(
             "voidabyss_stone_leggings",
-            Item::new, // TODO: ModArmorItem, full armor effects
+            ModArmorItem::new,
             new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.LEGGINGS));
 
     public static final Item VOIDABYSS_STONE_BOOTS = register(
             "voidabyss_stone_boots",
-            Item::new, // TODO: ModArmorItem, full armor effects
+            ModArmorItem::new,
             new Item.Properties().humanoidArmor(ModArmorMaterials.VOIDABYSS_STONE, ArmorType.BOOTS));
 
     public static final Item SHUODEDAOLI = register(
@@ -131,7 +132,5 @@ public class ModItems {
     }
 
     public static void bootstrap() {
-        // ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
-        // .register(item_group -> item_group.accept(ModItems.FIRST_ITEM));
     }
 }
