@@ -25,7 +25,6 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators generator) {
         generator.createTrivialCube(ModBlocks.FIRST_ITEM_BLOCK);
 
-        // TODO: need test
         generator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
                 ModBlocks.THERAPEUTIC_TABLE,
                 BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM
@@ -64,7 +63,6 @@ public class ModModelProvider extends FabricModelProvider {
         generator.generateFlatItem(ModItems.VOIDABYSS_STONE_SHOVEL, ModelTemplates.FLAT_HANDHELD_ITEM);
         generator.generateFlatItem(ModItems.VOIDABYSS_STONE_HOE, ModelTemplates.FLAT_HANDHELD_ITEM);
 
-        // TODO: need test
         generator.generateTrimmableItem(ModItems.VOIDABYSS_STONE_HELMET,
                 ModEquipmentAssets.VOIDABYSS_STONE,
                 ItemModelGenerators.TRIM_PREFIX_HELMET,

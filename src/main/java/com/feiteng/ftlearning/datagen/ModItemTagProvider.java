@@ -2,6 +2,7 @@ package com.feiteng.ftlearning.datagen;
 
 import java.util.concurrent.CompletableFuture;
 
+import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.tag.ModItemTags;
 
@@ -34,5 +35,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         // valueLookupBuilder(ItemTags.MUSIC_DISCS)
         //         .addOptionalTag(ModItemTags.DINGZHEN_MUSIC_DISCS);
+
+        valueLookupBuilder(ModItemTags.REPAIRS_VOIDABYSS_STONE_ARMOR)
+                .add(ModBlocks.VOIDABYSS_STONE.asItem());
     }
 }
