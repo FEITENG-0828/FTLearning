@@ -88,7 +88,7 @@ public class ModItems {
 
     public static final Item DISC_FRAGMENT_GENERAL = register(
             "disc_fragment_general",
-            DiscFragmentItem::new, new Item.Properties()); // TODO: .rarity(Rarity.UNCOMMON) ?
+            DiscFragmentItem::new, new Item.Properties().rarity(Rarity.UNCOMMON));
 
     public static final Item MUSIC_DISC_IGOTSMOKE = register(
             "music_disc_igotsmoke",

@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.custom.TherapeuticTableBlock;
+import com.feiteng.ftlearning.sound.ModBlockSoundType;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -101,8 +102,8 @@ public class ModBlocks {
     public static final Block SHUODEDAOLI_BLOCK = register(
             "shuodedaoli_block",
             Block::new,
-            BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT));
-    // .sound(ModBlockSoundGroups.SHUODEDAOLI_BLOCK)); TODO
+            BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT)
+                    .sound(ModBlockSoundType.SHUODEDAOLI_BLOCK));
 
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {

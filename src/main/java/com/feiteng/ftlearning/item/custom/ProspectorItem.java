@@ -7,7 +7,7 @@ import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.tag.ModBlockTags;
 // import com.feiteng.ftlearning.util.HelpfulFuncs;
 
-// import net.minecraft.ChatFormatting;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -45,19 +45,21 @@ public class ProspectorItem extends Item {
                 user.displayClientMessage(Component.translatable(
                         ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
                         block_state.getBlock().getName(),
-                        check_pos.getX(), check_pos.getY(), check_pos.getZ()),
-                        true); // TODO: ?
-                level.playSound(user, user.blockPosition(),
-                        ModSoundEvents.ITEM_PROSPECTOR_USE_SUCCESS, user.getSoundSource());
+                        check_pos.getX(), check_pos.getY(), check_pos.getZ())
+                        .withStyle(ChatFormatting.GREEN),
+                        true);
+                level.playSound(null, user.blockPosition(),
+                        ModSoundEvents.PROSPECTOR_USE_SUCCESS, user.getSoundSource());
                 break;
             }
         }
         if (!has_found_block) {
             user.displayClientMessage(Component.translatable(
-                    ModItems.PROSPECTOR.getDescriptionId() + ".use.failure"),
-                    true); // TODO: ?
-            level.playSound(user, user.blockPosition(),
-                    ModSoundEvents.ITEM_PROSPECTOR_USE_FAILURE, user.getSoundSource());
+                    ModItems.PROSPECTOR.getDescriptionId() + ".use.failure")
+                    .withStyle(ChatFormatting.RED),
+                    true);
+            level.playSound(null, user.blockPosition(),
+                    ModSoundEvents.PROSPECTOR_USE_FAILURE, user.getSoundSource());
         }
 
         context.getItemInHand().hurtAndBreak(1, user, context.getHand());
