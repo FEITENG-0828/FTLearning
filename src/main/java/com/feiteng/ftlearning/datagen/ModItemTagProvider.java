@@ -38,5 +38,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         valueLookupBuilder(ModItemTags.REPAIRS_VOIDABYSS_STONE_ARMOR)
                 .add(ModBlocks.VOIDABYSS_STONE.asItem());
+
+        valueLookupBuilder(ModItemTags.VOIDABYSS_STONE_TOOL_MATERIALS)
+                .add(ModBlocks.VOIDABYSS_STONE.asItem());
     }
 }
