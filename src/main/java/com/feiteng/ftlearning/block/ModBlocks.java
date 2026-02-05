@@ -116,7 +116,7 @@ public class ModBlocks {
         BlockItem block_item = new BlockItem(block, new Item.Properties()
                 .setId(item_key).useBlockDescriptionPrefix());
 
-        // block_item.registerBlocks(Item.BY_BLOCK, block_item); // TODO: somehow auto register in BY_BLOCK
+        block_item.registerBlocks(Item.BY_BLOCK, block_item);
         Registry.register(BuiltInRegistries.ITEM, item_key, block_item);
 
         return Registry.register(BuiltInRegistries.BLOCK, block_key, block);

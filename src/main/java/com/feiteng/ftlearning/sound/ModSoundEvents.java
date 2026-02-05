@@ -17,7 +17,7 @@ public class ModSoundEvents {
     public static final SoundEvent SHUODEDAOLI_BLOCK_HIT = register("block.shuodedaoli_block.hit");
     public static final SoundEvent SHUODEDAOLI_BLOCK_FALL = register("block.shuodedaoli_block.fall");
 
-    // public static final SoundEvent MUSIC_DISC_IGOTSMOKE = register("music_disc.igotsmoke");
+    public static final SoundEvent MUSIC_DISC_IGOTSMOKE = register("music_disc.igotsmoke");
 
     private static SoundEvent register(String name) {
         Identifier id = Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, name);

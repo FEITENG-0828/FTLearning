@@ -6,6 +6,8 @@ import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
 
+import com.feiteng.ftlearning.sound.ModJukeboxSongs;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -16,7 +18,6 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiscFragmentItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.JukeboxSongs;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -93,9 +94,7 @@ public class ModItems {
     public static final Item MUSIC_DISC_IGOTSMOKE = register(
             "music_disc_igotsmoke",
             Item::new, new Item.Properties().stacksTo(1).rarity(Rarity.RARE)
-                    .jukeboxPlayable(JukeboxSongs.OTHERSIDE));
-    // new MusicDiscItem(1, ModSoundEvents.MUSIC_DISC_IGOTSMOKE, TODO
-    // new FabricItemSettings().maxCount(1).rarity(Rarity.RARE), 246));
+                    .jukeboxPlayable(ModJukeboxSongs.IGOTSMOKE));
 
     public static final Item ADVANCED_PROSPECTOR = register(
             "advanced_prospector",
