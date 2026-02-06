@@ -18,8 +18,6 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.ItemLike;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
@@ -38,10 +36,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(lookup, recipe_output) {
             @Override
             public void buildRecipes() {
-                SimpleCookingRecipeBuilder.generic(Ingredient.of(Items.ROTTEN_FLESH), // smelting ?
-                        RecipeCategory.MISC, Items.LEATHER, // TODO: check cooking book tab
-                        0.2F, 200,
-                        RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+                SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.ROTTEN_FLESH),
+                        RecipeCategory.MISC, Items.LEATHER, 0.2F, 200)
+                        .group(getItemName(Items.LEATHER))
                         .unlockedBy(getHasName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH))
                         .save(output, getModRecipeName(
                                 Items.LEATHER, "from_smelting",
@@ -271,10 +268,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModBlocks.VOIDABYSS_STONE), has(ModBlocks.VOIDABYSS_STONE))
                         .save(output);
 
-                SimpleCookingRecipeBuilder.generic(Ingredient.of(Items.SADDLE), // smelting ?
-                        RecipeCategory.MISC, Items.LEATHER, // TODO: check cooking book tab
-                        25.0f, 300,
-                        RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new)
+                SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.SADDLE),
+                        RecipeCategory.MISC, Items.LEATHER, 25.0F, 300)
+                        .group(getItemName(Items.LEATHER))
                         .unlockedBy(getHasName(Items.SADDLE), has(Items.SADDLE))
                         .save(output, getModRecipeName(
                                 Items.LEATHER, "from_smelting",

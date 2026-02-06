@@ -2,6 +2,7 @@ package com.feiteng.ftlearning.sound;
 
 import com.feiteng.ftlearning.FTLearning;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -17,11 +18,18 @@ public class ModSoundEvents {
     public static final SoundEvent SHUODEDAOLI_BLOCK_HIT = register("block.shuodedaoli_block.hit");
     public static final SoundEvent SHUODEDAOLI_BLOCK_FALL = register("block.shuodedaoli_block.fall");
 
-    public static final SoundEvent MUSIC_DISC_IGOTSMOKE = register("music_disc.igotsmoke");
+    public static final Holder.Reference<SoundEvent> MUSIC_DISC_IGOTSMOKE = registerForHolder(
+            "music_disc.igotsmoke");
 
     private static SoundEvent register(String name) {
         Identifier id = Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, name);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+    }
+
+    private static Holder.Reference<SoundEvent> registerForHolder(String name) {
+        Identifier id = Identifier.fromNamespaceAndPath(FTLearning.MOD_ID, name);
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id,
+                SoundEvent.createVariableRangeEvent(id));
     }
 
     public static void bootstrap() {

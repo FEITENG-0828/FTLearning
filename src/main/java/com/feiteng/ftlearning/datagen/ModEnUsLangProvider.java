@@ -6,6 +6,8 @@ import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
+import com.feiteng.ftlearning.sound.ModJukeboxSongs;
+import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -94,7 +96,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.DISC_FRAGMENT_GENERAL.getDescriptionId() + ".desc",
                 "Song unstored");
         builder.add(ModItems.MUSIC_DISC_IGOTSMOKE, "Music Disc");
-        builder.add(ModItems.MUSIC_DISC_IGOTSMOKE.getDescriptionId() + ".desc",
+        builder.add(HelpfulFuncs.makeDescriptionId("jukebox_song", ModJukeboxSongs.IGOTSMOKE),
                 "Venoflame - I Got Smoke (Explicit Ver.)");
 
         // CompressedBlocks.translateAll(builder, this.language_code);

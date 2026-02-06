@@ -5,7 +5,6 @@ import java.util.function.Function;
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
-
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
 
 import net.minecraft.core.Registry;

@@ -6,9 +6,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.ItemLike;
 
 public class HelpfulFuncs {
+    public static String makeDescriptionId(String string, ResourceKey<?> key) {
+        return Util.makeDescriptionId(string, key.identifier());
+    }
+
     public static String getModNamespacedIdStr(ItemLike item_like) {
         return FTLearning.MOD_ID + ':' + RecipeProvider.getItemName(item_like);
     }

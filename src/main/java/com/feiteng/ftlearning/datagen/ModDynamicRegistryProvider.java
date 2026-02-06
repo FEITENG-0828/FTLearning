@@ -1,15 +1,16 @@
 package com.feiteng.ftlearning.datagen;
 
+import java.util.concurrent.CompletableFuture;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
-import java.util.concurrent.CompletableFuture;
-
 import net.minecraft.core.registries.Registries;
 
 public class ModDynamicRegistryProvider extends FabricDynamicRegistryProvider {
-    public ModDynamicRegistryProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(output, registriesFuture);
+    public ModDynamicRegistryProvider(FabricDataOutput data_output,
+            CompletableFuture<HolderLookup.Provider> lookup) {
+        super(data_output, lookup);
     }
 
     @Override
@@ -19,6 +20,6 @@ public class ModDynamicRegistryProvider extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "Features";
+        return "Dynamic Registries";
     }
 }

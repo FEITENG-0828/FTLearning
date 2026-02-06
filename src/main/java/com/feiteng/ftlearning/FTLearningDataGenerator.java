@@ -1,7 +1,16 @@
 package com.feiteng.ftlearning;
 
-import com.feiteng.ftlearning.datagen.*;
+import com.feiteng.ftlearning.datagen.ModBlockLootTableProvider;
+import com.feiteng.ftlearning.datagen.ModBlockTagProvider;
+import com.feiteng.ftlearning.datagen.ModDynamicRegistryProvider;
+import com.feiteng.ftlearning.datagen.ModEnUsLangProvider;
+import com.feiteng.ftlearning.datagen.ModEquipmentAssetProvider;
+import com.feiteng.ftlearning.datagen.ModItemTagProvider;
+import com.feiteng.ftlearning.datagen.ModModelProvider;
+import com.feiteng.ftlearning.datagen.ModRecipeProvider;
+import com.feiteng.ftlearning.datagen.ModZhCnLangProvider;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
+
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
@@ -24,7 +33,7 @@ public class FTLearningDataGenerator implements DataGeneratorEntrypoint {
     }
 
     @Override
-    public void buildRegistry(RegistrySetBuilder registry_builder) {
-        registry_builder.add(Registries.JUKEBOX_SONG, ModJukeboxSongs::bootstrap);
+    public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.JUKEBOX_SONG, ModJukeboxSongs::bootstrap);
     }
 }

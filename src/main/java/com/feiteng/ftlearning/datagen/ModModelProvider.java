@@ -83,6 +83,7 @@ public class ModModelProvider extends FabricModelProvider {
         generator.generateFlatItem(ModItems.SHUODEDAOLI, ModelTemplates.FLAT_ITEM);
 
         generator.generateFlatItem(ModItems.DISC_FRAGMENT_GENERAL, ModelTemplates.FLAT_ITEM);
+
         generator.generateFlatItem(ModItems.MUSIC_DISC_IGOTSMOKE, ModelTemplates.MUSIC_DISC);
     }
 
