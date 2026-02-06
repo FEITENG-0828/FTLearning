@@ -5,9 +5,10 @@ import java.util.function.Consumer;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.tag.ModBlockTags;
-// import com.feiteng.ftlearning.util.HelpfulFuncs;
+import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -77,11 +78,11 @@ public class ProspectorItem extends Item {
             Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
 
-        // if (!stack.getEntityRepresentation().isShiftKeyDown()) { // TODO: test change shift key
-        //     consumer.accept(HelpfulFuncs.getTooltipMaskText("shift"));
-        // } else {
-        //     consumer.accept(Component.translatable(
-        //             this.descriptionId + ".tooltip").withStyle(ChatFormatting.GRAY));
-        // }
+        if (!Minecraft.getInstance().hasShiftDown()) {
+            consumer.accept(HelpfulFuncs.getTooltipMaskText("shift"));
+        } else {
+            consumer.accept(Component.translatable(
+                    this.descriptionId + ".tooltip").withStyle(ChatFormatting.GRAY));
+        }
     }
 }
