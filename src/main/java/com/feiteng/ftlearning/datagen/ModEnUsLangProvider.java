@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.item.ModPotions;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
@@ -100,5 +101,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
                 "Venoflame - I Got Smoke (Explicit Ver.)");
 
         // CompressedBlocks.translateAll(builder, this.language_code);
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Fury");
     }
 }
