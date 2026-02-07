@@ -102,5 +102,7 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         // CompressedBlocks.translateAll(builder, this.language_code);
 
         builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "疾攻药水");
+
+        builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "盔甲架刷怪蛋");
     }
 }

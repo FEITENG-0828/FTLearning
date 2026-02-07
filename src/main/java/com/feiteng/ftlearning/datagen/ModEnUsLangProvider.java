@@ -103,5 +103,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         // CompressedBlocks.translateAll(builder, this.language_code);
 
         builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Fury");
+
+        builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
     }
 }

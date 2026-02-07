@@ -12,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiscFragmentItem;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.equipment.ArmorType;
 
 public class ModItems {
@@ -119,6 +121,11 @@ public class ModItems {
     public static final Item CHROMOGENIC_LENS = register(
             "chromogenic_lens",
             Item::new, new Item.Properties());
+
+    public static final Item ARMOR_STAND_SPAWN_EGG = register(
+            "armor_stand_spawn_egg",
+            SpawnEggItem::new,
+            new Item.Properties().spawnEgg(EntityType.ARMOR_STAND));
 
     public static Item register(String name,
             Function<Item.Properties, Item> func, Item.Properties properties) {

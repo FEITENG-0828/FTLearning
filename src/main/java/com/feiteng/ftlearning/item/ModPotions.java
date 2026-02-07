@@ -12,7 +12,7 @@ import net.minecraft.world.item.alchemy.Potion;
 
 public class ModPotions {
     public static final Holder<Potion> FURY = register("fury",
-            new Potion("fury", new MobEffectInstance(MobEffects.GLOWING, 3600)));
+            new Potion("fury", new MobEffectInstance(MobEffects.GLOWING, 3600))); // TODO
     // TODO: strong / long
 
     private static Holder<Potion> register(String name, Potion potion) {

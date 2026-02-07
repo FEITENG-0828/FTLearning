@@ -75,6 +75,10 @@ public class ModItemGroups {
 
                             output.accept(ModItems.DISC_FRAGMENT_GENERAL);
                             output.accept(ModItems.MUSIC_DISC_IGOTSMOKE);
+
+                            // TODO: potion
+
+                            output.accept(ModItems.ARMOR_STAND_SPAWN_EGG);
                         })
                         .build());
 
