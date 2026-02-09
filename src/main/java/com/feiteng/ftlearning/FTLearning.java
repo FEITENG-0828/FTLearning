@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.ModPotions;
@@ -33,6 +34,7 @@ public class FTLearning implements ModInitializer {
         ModItemGroups.bootstrap();
         ModSoundEvents.bootstrap();
         ModPotions.bootstrap();
+        ModEnchantments.bootstrap();
 
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.FIRST_ITEM, 160 * 20);

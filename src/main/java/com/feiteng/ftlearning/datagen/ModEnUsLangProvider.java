@@ -3,11 +3,13 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.ModPotions;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
+import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -52,10 +54,8 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.ADVANCED_PROSPECTOR.getDescriptionId() + ".use.done",
                 "Scan completed");
 
-        builder.add("subtitles.ftlearning.item.prospector.use.success",
-                "Ores detected");
-        builder.add("subtitles.ftlearning.item.prospector.use.failure",
-                "No ore detected");
+        builder.add(ModSoundEvents.PROSPECTOR_USE_SUCCESS, "Ores detected");
+        builder.add(ModSoundEvents.PROSPECTOR_USE_FAILURE, "No ore detected");
 
         builder.add(ModItems.AR_GLASSES, "AR Glasses");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "Therapeutic Table");
@@ -105,5 +105,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Fury");
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
+
+        builder.addEnchantment(ModEnchantments.MIRE, "Mire");
     }
 }

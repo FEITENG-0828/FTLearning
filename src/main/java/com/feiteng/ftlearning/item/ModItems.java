@@ -127,6 +127,8 @@ public class ModItems {
             SpawnEggItem::new,
             new Item.Properties().spawnEgg(EntityType.ARMOR_STAND));
 
+    // TODO: enchantable items need tags
+
     public static Item register(String name,
             Function<Item.Properties, Item> func, Item.Properties properties) {
         ResourceKey<Item> item_key = ResourceKey.create(Registries.ITEM,

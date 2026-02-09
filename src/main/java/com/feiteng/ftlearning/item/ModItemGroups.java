@@ -79,6 +79,8 @@ public class ModItemGroups {
                             // TODO: potion
 
                             output.accept(ModItems.ARMOR_STAND_SPAWN_EGG);
+
+                            // TODO: enchantment book
                         })
                         .build());
 
