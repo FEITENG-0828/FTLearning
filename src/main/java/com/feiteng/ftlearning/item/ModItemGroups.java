@@ -83,6 +83,8 @@ public class ModItemGroups {
                             // TODO: enchantment book
 
                             output.accept(ModItems.SIMPLE_TUNER);
+
+                            output.accept(ModBlocks.VOIDABYSS_STONE_PILLAR);
                         })
                         .build());
 

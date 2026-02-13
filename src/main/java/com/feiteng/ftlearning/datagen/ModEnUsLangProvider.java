@@ -115,7 +115,11 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
                 "Block Light Level");
 
         builder.add(ModItems.SIMPLE_TUNER, "Simple Tuner");
-        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use", "Mode: %1$s, Value: %2$s");
-        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover", "%1$s: %2$s, %3$s: %4$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use",
+                "Mode: %1$s, Value: %2$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover",
+                "%1$s: %2$s, %3$s: %4$s");
+
+        builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "Voidabyss Stone Pillar");
     }
 }

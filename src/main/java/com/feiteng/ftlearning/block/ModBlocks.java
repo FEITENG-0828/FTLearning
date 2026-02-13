@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
@@ -104,6 +105,11 @@ public class ModBlocks {
             Block::new,
             BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT)
                     .sound(ModBlockSoundType.SHUODEDAOLI_BLOCK));
+
+    public static final Block VOIDABYSS_STONE_PILLAR = register(
+            "voidabyss_stone_pillar",
+            RotatedPillarBlock::new,
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE).lightLevel(state -> 10));
 
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {

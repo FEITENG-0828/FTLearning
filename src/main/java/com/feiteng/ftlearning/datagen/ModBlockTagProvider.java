@@ -35,7 +35,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.VOIDABYSS_STONE_BUTTON)
                 .add(ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE)
                 .add(ModBlocks.VOIDABYSS_STONE_DOOR)
-                .add(ModBlocks.VOIDABYSS_STONE_TRAPDOOR);
+                .add(ModBlocks.VOIDABYSS_STONE_TRAPDOOR)
+                .add(ModBlocks.VOIDABYSS_STONE_PILLAR);
 
         valueLookupBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.FIRST_ITEM_BLOCK)
@@ -48,7 +49,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.VOIDABYSS_STONE_BUTTON)
                 .add(ModBlocks.VOIDABYSS_STONE_PRESSURE_PLATE)
                 .add(ModBlocks.VOIDABYSS_STONE_DOOR)
-                .add(ModBlocks.VOIDABYSS_STONE_TRAPDOOR);
+                .add(ModBlocks.VOIDABYSS_STONE_TRAPDOOR)
+                .add(ModBlocks.VOIDABYSS_STONE_PILLAR);
 
         valueLookupBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.THERAPEUTIC_TABLE);

@@ -114,7 +114,11 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
                 "方块光照等级");
 
         builder.add(ModItems.SIMPLE_TUNER, "简易调谐器");
-        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use", "模式: %1$s, 值: %2$s");
-        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover", "%1$s: %2$s, %3$s: %4$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use",
+                "模式: %1$s, 值: %2$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover",
+                "%1$s: %2$s, %3$s: %4$s");
+
+        builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "渊虚石柱");
     }
 }
