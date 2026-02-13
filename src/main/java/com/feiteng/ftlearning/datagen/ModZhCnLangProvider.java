@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
@@ -30,14 +31,14 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.FIRST_ITEM, "第一物品");
         builder.add(ModBlocks.FIRST_ITEM_BLOCK, "第一物块");
 
-        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL物品组 : 核心");
-        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL物品组 : 压缩");
+        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL物品组: 核心");
+        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL物品组: 压缩");
 
-        builder.add("item.ftlearning.tooltip_mask1", "按住");
-        builder.add("item.ftlearning.tooltip_mask2", "以获得更多信息");
+        builder.add(HelpfulFuncs.HOVER_MASK1_KEY, "按住");
+        builder.add(HelpfulFuncs.HOVER_MASK2_KEY, "以获得更多信息");
 
         builder.add(ModItems.PROSPECTOR, "探矿者");
-        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".tooltip",
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".hover",
                 "右键单击该方块以检测上下64格内的珍贵矿石");
         builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
                 "在 (%2$s, %3$s, %4$s) 检测到 %1$s");
@@ -106,5 +107,14 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "盔甲架刷怪蛋");
 
         builder.addEnchantment(ModEnchantments.MIRE, "迟滞");
+
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.SIGNAL),
+                "红石信号强度");
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.EMISSION),
+                "方块光照等级");
+
+        builder.add(ModItems.SIMPLE_TUNER, "简易调谐器");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use", "模式: %1$s, 值: %2$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover", "%1$s: %2$s, %3$s: %4$s");
     }
 }

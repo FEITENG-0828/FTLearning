@@ -3,8 +3,11 @@ package com.feiteng.ftlearning.item;
 import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.component.ModDataComponents;
+import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
+import com.feiteng.ftlearning.item.custom.SimpleTunerItem;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
 
 import net.minecraft.core.Registry;
@@ -124,10 +127,12 @@ public class ModItems {
 
     public static final Item ARMOR_STAND_SPAWN_EGG = register(
             "armor_stand_spawn_egg",
-            SpawnEggItem::new,
-            new Item.Properties().spawnEgg(EntityType.ARMOR_STAND));
+            SpawnEggItem::new, new Item.Properties().spawnEgg(EntityType.ARMOR_STAND));
 
-    // TODO: enchantable items need tags
+    public static final Item SIMPLE_TUNER = register(
+            "simple_tuner",
+            SimpleTunerItem::new, new Item.Properties().stacksTo(1)
+                    .component(ModDataComponents.SIMPLE_TUNER_DATA, SimpleTunerData.DEFAULT));
 
     public static Item register(String name,
             Function<Item.Properties, Item> func, Item.Properties properties) {

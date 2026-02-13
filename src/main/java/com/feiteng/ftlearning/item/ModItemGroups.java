@@ -81,6 +81,8 @@ public class ModItemGroups {
                             output.accept(ModItems.ARMOR_STAND_SPAWN_EGG);
 
                             // TODO: enchantment book
+
+                            output.accept(ModItems.SIMPLE_TUNER);
                         })
                         .build());
 

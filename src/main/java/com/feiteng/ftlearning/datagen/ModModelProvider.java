@@ -87,6 +87,8 @@ public class ModModelProvider extends FabricModelProvider {
         generator.generateFlatItem(ModItems.MUSIC_DISC_IGOTSMOKE, ModelTemplates.MUSIC_DISC);
 
         generator.generateFlatItem(ModItems.ARMOR_STAND_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+
+        generator.generateFlatItem(ModItems.SIMPLE_TUNER, ModelTemplates.FLAT_HANDHELD_ITEM); // TODO
     }
 
     // public static VariantsBlockStateSupplier createBlockStateWithAllRandomRotations(

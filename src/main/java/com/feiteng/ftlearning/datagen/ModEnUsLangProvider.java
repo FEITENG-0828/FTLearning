@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
@@ -30,14 +31,14 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.FIRST_ITEM, "First Item");
         builder.add(ModBlocks.FIRST_ITEM_BLOCK, "First Item Block");
 
-        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL Group : Core");
-        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL Group : Compressed");
+        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL Group: Core");
+        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL Group: Compressed");
 
-        builder.add("item.ftlearning.tooltip_mask1", "Hold ");
-        builder.add("item.ftlearning.tooltip_mask2", " for more information");
+        builder.add(HelpfulFuncs.HOVER_MASK1_KEY, "Hold ");
+        builder.add(HelpfulFuncs.HOVER_MASK2_KEY, " for more information");
 
         builder.add(ModItems.PROSPECTOR, "Prospector");
-        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".tooltip",
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".hover",
                 "Right click on the block to detect precious ores"
                         + " within the upper and lower 64 blocks");
         builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
@@ -107,5 +108,14 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
 
         builder.addEnchantment(ModEnchantments.MIRE, "Mire");
+
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.SIGNAL),
+                "Redstone Signal Strength");
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.EMISSION),
+                "Block Light Level");
+
+        builder.add(ModItems.SIMPLE_TUNER, "Simple Tuner");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use", "Mode: %1$s, Value: %2$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover", "%1$s: %2$s, %3$s: %4$s");
     }
 }

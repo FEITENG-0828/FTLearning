@@ -14,6 +14,9 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 
 public class HelpfulFuncs {
+    public static final String HOVER_MASK1_KEY = "item.ftlearning.hover_mask1";
+    public static final String HOVER_MASK2_KEY = "item.ftlearning.hover_mask2";
+
     public static String makeDescriptionId(String string, ResourceKey<?> key) {
         return Util.makeDescriptionId(string, key.identifier());
     }
@@ -26,10 +29,10 @@ public class HelpfulFuncs {
         return FTLearning.MOD_ID + ':' + RecipeProvider.getItemName(item_like);
     }
 
-    public static MutableComponent getTooltipMaskText(String key_name) {
-        return Component.translatable("item.ftlearning.tooltip_mask1").withStyle(ChatFormatting.AQUA)
+    public static MutableComponent getHoverMaskComponent(String key_name) {
+        return Component.translatable(HOVER_MASK1_KEY).withStyle(ChatFormatting.AQUA)
                 .append(Component.literal(key_name.toUpperCase())
                         .withStyle(ChatFormatting.GOLD, ChatFormatting.UNDERLINE))
-                .append(Component.translatable("item.ftlearning.tooltip_mask2").withStyle(ChatFormatting.AQUA));
+                .append(Component.translatable(HOVER_MASK2_KEY).withStyle(ChatFormatting.AQUA));
     }
 }
