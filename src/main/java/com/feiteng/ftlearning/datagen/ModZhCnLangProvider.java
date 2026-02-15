@@ -102,7 +102,28 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
 
         // CompressedBlocks.translateAll(builder, this.language_code);
 
-        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "疾攻药水");
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "发光药水");
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY_LONG), "发光药水 长效");
+        builder.add("item.minecraft.splash_potion.effect.glowing", "喷溅型发光药水");
+        builder.add("item.minecraft.splash_potion.effect.long_glowing", "喷溅型发光药水 长效");
+        builder.add("item.minecraft.lingering_potion.effect.glowing", "滞留型发光药水");
+        builder.add("item.minecraft.lingering_potion.effect.long_glowing", "滞留型发光药水 长效");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_I), "攻速提升药水 I");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_i", "喷溅型攻速提升药水 I");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_i", "滞留型攻速提升药水 I");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_II), "攻速提升药水 II");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_ii", "喷溅型攻速提升药水 II");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_ii", "滞留型攻速提升药水 II");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_III), "攻速提升药水 III");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_iii", "喷溅型攻速提升药水 III");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_iii", "滞留型攻速提升药水 III");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_LONG), "攻速提升药水 长效");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_long", "喷溅型攻速提升药水 长效");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_long", "滞留型攻速提升药水 长效");
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "盔甲架刷怪蛋");
 

@@ -103,7 +103,28 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
 
         // CompressedBlocks.translateAll(builder, this.language_code);
 
-        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Fury");
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Glowing");
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY_LONG), "Potion of Glowing Long");
+        builder.add("item.minecraft.splash_potion.effect.glowing", "Splash Potion of Glowing");
+        builder.add("item.minecraft.splash_potion.effect.long_glowing", "Splash Potion of Glowing Long");
+        builder.add("item.minecraft.lingering_potion.effect.glowing", "Lingering Potion of Glowing");
+        builder.add("item.minecraft.lingering_potion.effect.long_glowing", "Lingering Potion of Glowing Long");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_I), "Potion of Attack Speed I");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_i", "Splash Potion of Attack Speed I");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_i", "Lingering Potion of Attack Speed I");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_II), "Potion of Attack Speed II");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_ii", "Splash Potion of Attack Speed II");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_ii", "Lingering Potion of Attack Speed II");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_III), "Potion of Attack Speed III");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_iii", "Splash Potion of Attack Speed III");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_iii", "Lingering Potion of Attack Speed III");
+
+        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.ATTACK_SPEED_LONG), "Potion of Attack Speed Long");
+        builder.add("item.minecraft.splash_potion.effect.attack_speed_long", "Splash Potion of Attack Speed Long");
+        builder.add("item.minecraft.lingering_potion.effect.attack_speed_long", "Lingering Potion of Attack Speed Long");
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
 

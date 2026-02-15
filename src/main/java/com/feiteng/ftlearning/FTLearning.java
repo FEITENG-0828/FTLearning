@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.component.ModDataComponents;
+import com.feiteng.ftlearning.effect.ModEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
@@ -34,6 +35,7 @@ public class FTLearning implements ModInitializer {
         ModItems.bootstrap();
         ModItemGroups.bootstrap();
         ModSoundEvents.bootstrap();
+        ModEffects.bootstrap();
         ModPotions.bootstrap();
         ModEnchantments.bootstrap();
         ModDataComponents.bootstrap();
@@ -47,6 +49,20 @@ public class FTLearning implements ModInitializer {
 
         FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
             builder.addStartMix(Items.CLOCK, ModPotions.FURY);
+            builder.addStartMix(Items.IRON_SWORD, ModPotions.ATTACK_SPEED_I);
+
+            
+            builder.addMix(ModPotions.FURY, Items.REDSTONE, ModPotions.FURY_LONG);
+            builder.addMix(ModPotions.FURY, Items.GLOWSTONE_DUST, ModPotions.FURY_STRONG);
+            builder.addMix(ModPotions.FURY, Items.GUNPOWDER, ModPotions.FURY_SPLASH);
+            builder.addMix(ModPotions.FURY_SPLASH, Items.DRAGON_BREATH, ModPotions.FURY_LINGERING);
+
+            
+            builder.addMix(ModPotions.ATTACK_SPEED_I, Items.REDSTONE, ModPotions.ATTACK_SPEED_LONG);
+            builder.addMix(ModPotions.ATTACK_SPEED_I, Items.GLOWSTONE_DUST, ModPotions.ATTACK_SPEED_II);
+            builder.addMix(ModPotions.ATTACK_SPEED_II, Items.GLOWSTONE_DUST, ModPotions.ATTACK_SPEED_III);
+            builder.addMix(ModPotions.ATTACK_SPEED_I, Items.GUNPOWDER, ModPotions.ATTACK_SPEED_SPLASH);
+            builder.addMix(ModPotions.ATTACK_SPEED_SPLASH, Items.DRAGON_BREATH, ModPotions.ATTACK_SPEED_LINGERING);
         });
 
         // ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
