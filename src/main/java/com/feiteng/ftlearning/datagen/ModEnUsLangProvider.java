@@ -121,5 +121,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
                 "%1$s: %2$s, %3$s: %4$s");
 
         builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "Voidabyss Stone Pillar");
+
+        builder.add(ModBlocks.TUNABLE_EMITTER, "Tunable Emitter");
     }
 }

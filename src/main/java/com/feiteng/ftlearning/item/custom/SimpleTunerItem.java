@@ -2,10 +2,14 @@ package com.feiteng.ftlearning.item.custom;
 
 import java.util.function.Consumer;
 
+import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.custom.TunableEmitterBlock;
 import com.feiteng.ftlearning.component.ModDataComponents;
 import com.feiteng.ftlearning.component.SimpleTunerData;
+import com.feiteng.ftlearning.item.ModItems;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +21,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SimpleTunerItem extends Item {
     public SimpleTunerItem(Properties properties) {
@@ -42,8 +47,23 @@ public class SimpleTunerItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        // TODO
-        return super.useOn(context);
+        Player user = context.getPlayer();
+        Level level = context.getLevel();
+        ItemStack stack = context.getItemInHand();
+        BlockPos block_pos = context.getClickedPos();
+        BlockState block_state = level.getBlockState(block_pos);
+        if (user == null || !stack.is(ModItems.SIMPLE_TUNER) ||
+                !block_state.is(ModBlocks.TUNABLE_EMITTER)) {
+            return InteractionResult.PASS;
+        } else if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        } else {
+            SimpleTunerData data = getOrCreateData(stack);
+            level.setBlockAndUpdate(block_pos,
+                    block_state.setValue(TunableEmitterBlock.POWER, data.signal())
+                            .setValue(TunableEmitterBlock.LEVEL, data.emission()));
+            return InteractionResult.SUCCESS;
+        }
     }
 
     @SuppressWarnings("deprecation")

@@ -12,7 +12,7 @@ import net.minecraft.resources.Identifier;
 public class ModDataComponents {
     public static final DataComponentType<SimpleTunerData> SIMPLE_TUNER_DATA = register(
             "simple_tuner_data", builder -> builder.persistent(SimpleTunerData.CODEC));
-    // .networkSynchronized() ?
+    // TODO: .networkSynchronized() ?
 
     private static <T> DataComponentType<T> register(String name,
             UnaryOperator<DataComponentType.Builder<T>> operator) {

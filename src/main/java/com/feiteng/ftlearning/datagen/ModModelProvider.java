@@ -40,6 +40,8 @@ public class ModModelProvider extends FabricModelProvider {
         generator.createAxisAlignedPillarBlock(ModBlocks.VOIDABYSS_STONE_PILLAR,
                 TexturedModel.COLUMN.updateTexture(map -> map.put(TextureSlot.SIDE,
                         TextureMapping.getBlockTexture(ModBlocks.VOIDABYSS_STONE))));
+
+        generator.createTrivialCube(ModBlocks.TUNABLE_EMITTER);
     }
 
     @Override

@@ -85,6 +85,8 @@ public class ModItemGroups {
                             output.accept(ModItems.SIMPLE_TUNER);
 
                             output.accept(ModBlocks.VOIDABYSS_STONE_PILLAR);
+
+                            output.accept(ModBlocks.TUNABLE_EMITTER);
                         })
                         .build());
 

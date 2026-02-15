@@ -35,6 +35,8 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
         // CompressedBlocks.generateLootTableAll(this);
 
         dropSelf(ModBlocks.VOIDABYSS_STONE_PILLAR);
+
+        dropSelf(ModBlocks.TUNABLE_EMITTER);
     }
 
     // public LootTable.Builder oreDropsWithFortune(
