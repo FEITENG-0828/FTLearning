@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.component.SimpleTunerData;
+import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
@@ -103,7 +104,9 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
 
         // CompressedBlocks.translateAll(builder, this.language_code);
 
-        builder.add(HelpfulFuncs.getPotionTranslationKey(ModPotions.FURY), "Potion of Fury");
+        builder.add(ModMobEffects.FURY.value(), "Fury");
+
+        HelpfulFuncs.translatePotion(builder, language_code, "Fury", ModPotions.FURY);
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
 

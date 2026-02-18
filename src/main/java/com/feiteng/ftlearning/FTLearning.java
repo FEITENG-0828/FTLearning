@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.component.ModDataComponents;
+import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
 import com.feiteng.ftlearning.item.ModItemGroups;
 import com.feiteng.ftlearning.item.ModItems;
@@ -34,6 +35,7 @@ public class FTLearning implements ModInitializer {
         ModItems.bootstrap();
         ModItemGroups.bootstrap();
         ModSoundEvents.bootstrap();
+        ModMobEffects.bootstrap();
         ModPotions.bootstrap();
         ModEnchantments.bootstrap();
         ModDataComponents.bootstrap();
@@ -47,6 +49,8 @@ public class FTLearning implements ModInitializer {
 
         FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
             builder.addStartMix(Items.CLOCK, ModPotions.FURY);
+            builder.addMix(ModPotions.FURY, Items.REDSTONE, ModPotions.LONG_FURY);
+            builder.addMix(ModPotions.FURY, Items.GLOWSTONE_DUST, ModPotions.STRONG_FURY);
         });
 
         // ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
