@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import com.feiteng.ftlearning.FTLearning;
 import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.tag.ModItemTags;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -339,12 +340,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 //         .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
                 //         .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.NETHER_STAR));
 
-                // TODO
-                // shapeless(RecipeCategory.MISC, ModItems.DISC_FRAGMENT_GENERAL, 9)
-                //         .requires(ItemTags.MUSIC_DISCS)
-                //         .group(getItemName(ModItems.DISC_FRAGMENT_GENERAL))
-                //         .unlockedBy("has_music_discs", conditionsFromTag(ItemTags.MUSIC_DISCS))
-                //         .save(output);
+                shapeless(RecipeCategory.MISC, ModItems.DISC_FRAGMENT_GENERAL, 9)
+                        .requires(ModItemTags.MUSIC_DISCS)
+                        .group(getItemName(ModItems.DISC_FRAGMENT_GENERAL))
+                        .unlockedBy("has_music_discs", has(ModItemTags.MUSIC_DISCS))
+                        .save(output);
 
                 shaped(RecipeCategory.MISC, Items.DISC_FRAGMENT_5, 1)
                         .define('S', Items.SCULK)
