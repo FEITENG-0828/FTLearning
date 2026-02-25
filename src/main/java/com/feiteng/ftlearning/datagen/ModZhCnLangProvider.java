@@ -125,5 +125,8 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "渊虚石柱");
 
         builder.add(ModBlocks.TUNABLE_EMITTER, "可调发信器");
+
+        builder.add(ModBlocks.ESSENCE_EXTRACTOR, "精粹提取器");
+        builder.add("container.essence_extractor", "精粹提取器");
     }
 }

@@ -126,5 +126,8 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "Voidabyss Stone Pillar");
 
         builder.add(ModBlocks.TUNABLE_EMITTER, "Tunable Emitter");
+
+        builder.add(ModBlocks.ESSENCE_EXTRACTOR, "Essence Extractor");
+        builder.add("container.essence_extractor", "Essence Extractor");
     }
 }

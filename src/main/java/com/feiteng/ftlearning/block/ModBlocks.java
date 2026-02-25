@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.block;
 import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.block.custom.EssenceExtractorBlock;
 import com.feiteng.ftlearning.block.custom.TherapeuticTableBlock;
 import com.feiteng.ftlearning.block.custom.TunableEmitterBlock;
 import com.feiteng.ftlearning.sound.ModBlockSoundType;
@@ -121,6 +122,11 @@ public class ModBlocks {
                     .strength(1F)
                     .sound(SoundType.LANTERN)
                     .lightLevel(TunableEmitterBlock.LIGHT_EMISSION));
+
+    public static final Block ESSENCE_EXTRACTOR = register(
+            "essence_extractor",
+            EssenceExtractorBlock::new,
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE)); // TODO
 
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {

@@ -42,6 +42,8 @@ public class ModModelProvider extends FabricModelProvider {
                         TextureMapping.getBlockTexture(ModBlocks.VOIDABYSS_STONE))));
 
         generator.createTrivialCube(ModBlocks.TUNABLE_EMITTER);
+
+        generator.createTrivialCube(ModBlocks.ESSENCE_EXTRACTOR); // TODO
     }
 
     @Override
