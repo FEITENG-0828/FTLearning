@@ -6,7 +6,7 @@ import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
-import com.feiteng.ftlearning.item.ModItemGroups;
+import com.feiteng.ftlearning.item.ModCreativeModeTabs;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.ModPotions;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
@@ -32,8 +32,8 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.FIRST_ITEM, "First Item");
         builder.add(ModBlocks.FIRST_ITEM_BLOCK, "First Item Block");
 
-        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL Group: Core");
-        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL Group: Compressed");
+        builder.add(ModCreativeModeTabs.FTL_GROUP_CORE, "FTL Group: Core");
+        builder.add(ModCreativeModeTabs.FTL_GROUP_COMPRESSED, "FTL Group: Compressed");
 
         builder.add(HelpfulFuncs.HOVER_MASK1_KEY, "Hold ");
         builder.add(HelpfulFuncs.HOVER_MASK2_KEY, " for more information");

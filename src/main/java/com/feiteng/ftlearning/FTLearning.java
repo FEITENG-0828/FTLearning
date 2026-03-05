@@ -8,7 +8,7 @@ import com.feiteng.ftlearning.block.ModBlocks;
 import com.feiteng.ftlearning.component.ModDataComponents;
 import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
-import com.feiteng.ftlearning.item.ModItemGroups;
+import com.feiteng.ftlearning.item.ModCreativeModeTabs;
 import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.item.ModPotions;
 import com.feiteng.ftlearning.render.ModMenuScreens;
@@ -36,7 +36,7 @@ public class FTLearning implements ModInitializer {
     public void onInitialize() {
         ModBlocks.bootstrap();
         ModItems.bootstrap();
-        ModItemGroups.bootstrap();
+        ModCreativeModeTabs.bootstrap();
         ModSoundEvents.bootstrap();
         ModMobEffects.bootstrap();
         ModPotions.bootstrap();
