@@ -11,6 +11,8 @@ import com.feiteng.ftlearning.render.EssenceExtractorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -109,19 +111,24 @@ public class EssenceExtractorBlockEntity extends BaseContainerBlockEntity implem
     protected void loadAdditional(ValueInput value_input) {
         super.loadAdditional(value_input);
 
-        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(value_input, this.items);
-        this.process_timer = value_input.getIntOr("process_timer", 0);
-        this.process_total_time = value_input.getIntOr("process_total_time", 0);
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(value_input, items);
+        process_timer = value_input.getIntOr("process_timer", 0);
+        process_total_time = value_input.getIntOr("process_total_time", 0);
     }
 
     @Override
     protected void saveAdditional(ValueOutput value_output) {
         super.saveAdditional(value_output);
 
-        ContainerHelper.saveAllItems(value_output, this.items);
-        value_output.putInt("process_timer", this.process_timer);
-        value_output.putInt("process_total_time", this.process_total_time);
+        ContainerHelper.saveAllItems(value_output, items);
+        value_output.putInt("process_timer", process_timer);
+        value_output.putInt("process_total_time", process_total_time);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(Provider provider) { // when
+        return saveWithoutMetadata(provider);
     }
 
     public static void serverTick(Level level, BlockPos block_pos,

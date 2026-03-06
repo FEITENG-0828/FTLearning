@@ -25,7 +25,7 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
     public ModZhCnLangProvider(FabricDataOutput data_output,
             CompletableFuture<HolderLookup.Provider> lookup) {
         super(data_output, "zh_cn", lookup);
-        this.language_code = "zh_cn";
+        language_code = "zh_cn";
     }
 
     @Override
