@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.custom.EssenceExtractorBlockEntity;
 import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
@@ -128,6 +129,6 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModBlocks.TUNABLE_EMITTER, "Tunable Emitter");
 
         builder.add(ModBlocks.ESSENCE_EXTRACTOR, "Essence Extractor");
-        builder.add("container.essence_extractor", "Essence Extractor");
+        builder.add(EssenceExtractorBlockEntity.TRANSLATION_KEY, "Essence Extractor");
     }
 }

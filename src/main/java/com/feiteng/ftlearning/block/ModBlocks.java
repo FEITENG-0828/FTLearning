@@ -126,7 +126,8 @@ public class ModBlocks {
     public static final Block ESSENCE_EXTRACTOR = register(
             "essence_extractor",
             EssenceExtractorBlock::new,
-            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE)); // TODO
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE)
+                    .lightLevel(Blocks.litBlockEmission(13)));
 
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {

@@ -43,7 +43,7 @@ public class ModModelProvider extends FabricModelProvider {
 
         generator.createTrivialCube(ModBlocks.TUNABLE_EMITTER);
 
-        generator.createTrivialCube(ModBlocks.ESSENCE_EXTRACTOR); // TODO
+        generator.createFurnace(ModBlocks.ESSENCE_EXTRACTOR, TexturedModel.ORIENTABLE_ONLY_TOP);
     }
 
     @Override

@@ -37,7 +37,7 @@ public class HelpfulFuncs {
             });
 
     public static void translatePotion(TranslationBuilder builder, String lang,
-            String translation, Holder<Potion> holder) { // FIXME: IGNORE ?
+            String translation, Holder<Potion> holder) { // FIXME: IGNORE unsafe vararg ?
         POTION_TRANSLATIONS.get(lang).forEach((potion_item, format) -> builder.add(
                 getPotionTranslationKey(potion_item, holder), String.format(format, translation)));
     }

@@ -3,6 +3,7 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
+import com.feiteng.ftlearning.block.custom.EssenceExtractorBlockEntity;
 import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.effect.ModMobEffects;
 import com.feiteng.ftlearning.enchantment.ModEnchantments;
@@ -127,6 +128,6 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
         builder.add(ModBlocks.TUNABLE_EMITTER, "可调发信器");
 
         builder.add(ModBlocks.ESSENCE_EXTRACTOR, "精粹提取器");
-        builder.add("container.essence_extractor", "精粹提取器");
+        builder.add(EssenceExtractorBlockEntity.TRANSLATION_KEY, "精粹提取器");
     }
 }
