@@ -35,9 +35,9 @@ public class EssenceExtractorBlockEntity extends BaseContainerBlockEntity implem
     protected static final int SLOT_INPUT = 0;
     protected static final int SLOT_FUEL = 1;
     protected static final int SLOT_OUTPUT = 2;
-    private static final int[] SLOTS_FOR_UP = new int[] { 0 };
-    private static final int[] SLOTS_FOR_SIDES = new int[] { 1 };
-    private static final int[] SLOTS_FOR_DOWN = new int[] { 1, 2 };
+    private static final int[] SLOTS_FOR_UP = new int[] { SLOT_INPUT };
+    private static final int[] SLOTS_FOR_SIDES = new int[] { SLOT_FUEL };
+    private static final int[] SLOTS_FOR_DOWN = new int[] { SLOT_FUEL, SLOT_OUTPUT };
     protected NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
 
     private int process_timer;
@@ -127,7 +127,7 @@ public class EssenceExtractorBlockEntity extends BaseContainerBlockEntity implem
     }
 
     @Override
-    public CompoundTag getUpdateTag(Provider provider) { // when
+    public CompoundTag getUpdateTag(Provider provider) { //TODO: when
         return saveWithoutMetadata(provider);
     }
 
@@ -216,7 +216,7 @@ public class EssenceExtractorBlockEntity extends BaseContainerBlockEntity implem
 
     @Override
     public boolean canPlaceItem(int i, ItemStack item_stack) {
-        if (i == 2) {
+        if (i == SLOT_OUTPUT) {
             return false;
         } else {
             return true;
