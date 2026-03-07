@@ -3,10 +3,16 @@ package com.feiteng.ftlearning.datagen;
 import java.util.concurrent.CompletableFuture;
 
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.item.ModItemGroups;
+import com.feiteng.ftlearning.block.custom.EssenceExtractorBlockEntity;
+import com.feiteng.ftlearning.component.SimpleTunerData;
+import com.feiteng.ftlearning.effect.ModMobEffects;
+import com.feiteng.ftlearning.enchantment.ModEnchantments;
+import com.feiteng.ftlearning.item.ModCreativeModeTabs;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.item.ModPotions;
 import com.feiteng.ftlearning.item.custom.AdvancedProspectorItem;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
+import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -19,7 +25,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
     public ModEnUsLangProvider(FabricDataOutput data_output,
             CompletableFuture<HolderLookup.Provider> lookup) {
         super(data_output, "en_us", lookup);
-        this.language_code = "en_us";
+        language_code = "en_us";
     }
 
     @Override
@@ -27,14 +33,14 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.FIRST_ITEM, "First Item");
         builder.add(ModBlocks.FIRST_ITEM_BLOCK, "First Item Block");
 
-        builder.add(ModItemGroups.FTL_GROUP_CORE, "FTL Group : Core");
-        builder.add(ModItemGroups.FTL_GROUP_COMPRESSED, "FTL Group : Compressed");
+        builder.add(ModCreativeModeTabs.FTL_GROUP_CORE, "FTL Group: Core");
+        builder.add(ModCreativeModeTabs.FTL_GROUP_COMPRESSED, "FTL Group: Compressed");
 
-        builder.add("item.ftlearning.tooltip_mask1", "Hold ");
-        builder.add("item.ftlearning.tooltip_mask2", " for more information");
+        builder.add(HelpfulFuncs.HOVER_MASK1_KEY, "Hold ");
+        builder.add(HelpfulFuncs.HOVER_MASK2_KEY, " for more information");
 
         builder.add(ModItems.PROSPECTOR, "Prospector");
-        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".tooltip",
+        builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".hover",
                 "Right click on the block to detect precious ores"
                         + " within the upper and lower 64 blocks");
         builder.add(ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
@@ -51,10 +57,8 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
         builder.add(ModItems.ADVANCED_PROSPECTOR.getDescriptionId() + ".use.done",
                 "Scan completed");
 
-        builder.add("subtitles.ftlearning.item.prospector.use.success",
-                "Ores detected");
-        builder.add("subtitles.ftlearning.item.prospector.use.failure",
-                "No ore detected");
+        builder.add(ModSoundEvents.PROSPECTOR_USE_SUCCESS, "Ores detected");
+        builder.add(ModSoundEvents.PROSPECTOR_USE_FAILURE, "No ore detected");
 
         builder.add(ModItems.AR_GLASSES, "AR Glasses");
         builder.add(ModBlocks.THERAPEUTIC_TABLE, "Therapeutic Table");
@@ -100,5 +104,31 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
                 "Venoflame - I Got Smoke (Explicit Ver.)");
 
         // CompressedBlocks.translateAll(builder, this.language_code);
+
+        builder.add(ModMobEffects.FURY.value(), "Fury");
+
+        HelpfulFuncs.translatePotionItem(builder, language_code, "Fury", ModPotions.FURY);
+
+        builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
+
+        builder.addEnchantment(ModEnchantments.MIRE, "Mire");
+
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.SIGNAL),
+                "Redstone Signal Strength");
+        builder.add(SimpleTunerData.Mode.getTranslationKey(SimpleTunerData.Mode.EMISSION),
+                "Block Light Level");
+
+        builder.add(ModItems.SIMPLE_TUNER, "Simple Tuner");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".use",
+                "Mode: %1$s, Value: %2$s");
+        builder.add(ModItems.SIMPLE_TUNER.getDescriptionId() + ".hover",
+                "%1$s: %2$s, %3$s: %4$s");
+
+        builder.add(ModBlocks.VOIDABYSS_STONE_PILLAR, "Voidabyss Stone Pillar");
+
+        builder.add(ModBlocks.TUNABLE_EMITTER, "Tunable Emitter");
+
+        builder.add(ModBlocks.ESSENCE_EXTRACTOR, "Essence Extractor");
+        builder.add(EssenceExtractorBlockEntity.TRANSLATION_KEY, "Essence Extractor");
     }
 }

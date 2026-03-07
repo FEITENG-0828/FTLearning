@@ -49,5 +49,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         valueLookupBuilder(ModItemTags.VOIDABYSS_STONE_TOOL_MATERIALS)
                 .add(ModBlocks.VOIDABYSS_STONE.asItem());
+
+        // TODO: enchantable items need tags
     }
 }

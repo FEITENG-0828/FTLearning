@@ -35,5 +35,7 @@ public class FTLearningDataGenerator implements DataGeneratorEntrypoint {
     @Override
     public void buildRegistry(RegistrySetBuilder builder) {
         builder.add(Registries.JUKEBOX_SONG, ModJukeboxSongs::bootstrap);
+        // TODO: not add enchantments but still work ??? maybe need refactor
+        // (see https://beishanair.github.io/2025/08/01/121/enchantment/index.html)
     }
 }

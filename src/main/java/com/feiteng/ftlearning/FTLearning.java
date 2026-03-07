@@ -3,15 +3,24 @@ package com.feiteng.ftlearning;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feiteng.ftlearning.block.ModBlockEntityTypes;
 import com.feiteng.ftlearning.block.ModBlocks;
-import com.feiteng.ftlearning.item.ModItemGroups;
+import com.feiteng.ftlearning.component.ModDataComponents;
+import com.feiteng.ftlearning.effect.ModMobEffects;
+import com.feiteng.ftlearning.enchantment.ModEnchantments;
+import com.feiteng.ftlearning.item.ModCreativeModeTabs;
 import com.feiteng.ftlearning.item.ModItems;
+import com.feiteng.ftlearning.item.ModPotions;
+import com.feiteng.ftlearning.render.ModMenuScreens;
+import com.feiteng.ftlearning.render.ModMenuTypes;
 // import com.feiteng.ftlearning.item.custom.ArGlassesItem;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 // import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.minecraft.world.item.Items;
 // import net.minecraft.core.RegistryAccess.RegistryEntry;
 // import net.minecraft.server.network.ServerPlayerEntity;
 // import net.minecraft.tags.DamageTypeTags;
@@ -21,30 +30,33 @@ import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 
 public class FTLearning implements ModInitializer {
     public static final String MOD_ID = "ftlearning";
-
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
-
-        // LOGGER.info("Hello Fabric world!");
-
         ModBlocks.bootstrap();
         ModItems.bootstrap();
-        ModItemGroups.bootstrap();
+        ModCreativeModeTabs.bootstrap();
         ModSoundEvents.bootstrap();
+        ModMobEffects.bootstrap();
+        ModPotions.bootstrap();
+        ModEnchantments.bootstrap();
+        ModDataComponents.bootstrap();
+        ModBlockEntityTypes.bootstrap();
+        ModMenuTypes.bootstrap();
+        ModMenuScreens.bootstrap();
 
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.FIRST_ITEM, 160 * 20);
         });
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModBlocks.FIRST_ITEM_BLOCK, 1600 * 20);
+        });
+
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(builder -> {
+            builder.addStartMix(Items.CLOCK, ModPotions.FURY);
+            builder.addMix(ModPotions.FURY, Items.REDSTONE, ModPotions.LONG_FURY);
+            builder.addMix(ModPotions.FURY, Items.GLOWSTONE_DUST, ModPotions.STRONG_FURY);
         });
 
         // ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {

@@ -25,13 +25,9 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators generator) {
         generator.createTrivialCube(ModBlocks.FIRST_ITEM_BLOCK);
 
-        generator.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
-                ModBlocks.THERAPEUTIC_TABLE,
-                BlockModelGenerators.plainVariant(TexturedModel.CUBE_TOP_BOTTOM
-                        .get(ModBlocks.THERAPEUTIC_TABLE)
-                        .updateTextures(map -> map.put(TextureSlot.BOTTOM,
-                                TextureMapping.getBlockTexture(Blocks.OBSIDIAN)))
-                        .create(ModBlocks.THERAPEUTIC_TABLE, generator.modelOutput))));
+        generator.createTrivialBlock(ModBlocks.THERAPEUTIC_TABLE,
+                TexturedModel.CUBE_TOP_BOTTOM.updateTexture(map -> map.put(TextureSlot.BOTTOM,
+                        TextureMapping.getBlockTexture(Blocks.OBSIDIAN))));
 
         // TODO: door / trapdoor ?
         ModBlockFamilies.getAllFamilies().filter(BlockFamily::shouldGenerateModel)
@@ -40,6 +36,14 @@ public class ModModelProvider extends FabricModelProvider {
         generator.createTrivialCube(ModBlocks.SHUODEDAOLI_BLOCK);
 
         // CompressedBlocks.generateBlockStateModelAll(generator);
+
+        generator.createAxisAlignedPillarBlock(ModBlocks.VOIDABYSS_STONE_PILLAR,
+                TexturedModel.COLUMN.updateTexture(map -> map.put(TextureSlot.SIDE,
+                        TextureMapping.getBlockTexture(ModBlocks.VOIDABYSS_STONE))));
+
+        generator.createTrivialCube(ModBlocks.TUNABLE_EMITTER);
+
+        generator.createFurnace(ModBlocks.ESSENCE_EXTRACTOR, TexturedModel.ORIENTABLE_ONLY_TOP);
     }
 
     @Override
@@ -85,6 +89,10 @@ public class ModModelProvider extends FabricModelProvider {
         generator.generateFlatItem(ModItems.DISC_FRAGMENT_GENERAL, ModelTemplates.FLAT_ITEM);
 
         generator.generateFlatItem(ModItems.MUSIC_DISC_IGOTSMOKE, ModelTemplates.MUSIC_DISC);
+
+        generator.generateFlatItem(ModItems.ARMOR_STAND_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+
+        generator.generateFlatItem(ModItems.SIMPLE_TUNER, ModelTemplates.FLAT_HANDHELD_ITEM); // TODO
     }
 
     // public static VariantsBlockStateSupplier createBlockStateWithAllRandomRotations(

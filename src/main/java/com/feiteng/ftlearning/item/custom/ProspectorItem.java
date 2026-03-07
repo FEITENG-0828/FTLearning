@@ -2,7 +2,6 @@ package com.feiteng.ftlearning.item.custom;
 
 import java.util.function.Consumer;
 
-import com.feiteng.ftlearning.item.ModItems;
 import com.feiteng.ftlearning.sound.ModSoundEvents;
 import com.feiteng.ftlearning.tag.ModBlockTags;
 import com.feiteng.ftlearning.util.HelpfulFuncs;
@@ -44,7 +43,7 @@ public class ProspectorItem extends Item {
             if (isRightBlock(block_state)) {
                 has_found_block = true;
                 user.displayClientMessage(Component.translatable(
-                        ModItems.PROSPECTOR.getDescriptionId() + ".use.success",
+                        descriptionId + ".use.success",
                         block_state.getBlock().getName(),
                         check_pos.getX(), check_pos.getY(), check_pos.getZ())
                         .withStyle(ChatFormatting.GREEN),
@@ -56,8 +55,7 @@ public class ProspectorItem extends Item {
         }
         if (!has_found_block) {
             user.displayClientMessage(Component.translatable(
-                    ModItems.PROSPECTOR.getDescriptionId() + ".use.failure")
-                    .withStyle(ChatFormatting.RED),
+                    descriptionId + ".use.failure").withStyle(ChatFormatting.RED),
                     true);
             level.playSound(null, user.blockPosition(),
                     ModSoundEvents.PROSPECTOR_USE_FAILURE, user.getSoundSource());
@@ -73,16 +71,15 @@ public class ProspectorItem extends Item {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void appendHoverText(
-            ItemStack stack, Item.TooltipContext context, TooltipDisplay display,
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay display,
             Consumer<Component> consumer, TooltipFlag flag) {
         super.appendHoverText(stack, context, display, consumer, flag);
 
         if (!Minecraft.getInstance().hasShiftDown()) {
-            consumer.accept(HelpfulFuncs.getTooltipMaskText("shift"));
+            consumer.accept(HelpfulFuncs.getHoverMaskComponent("shift"));
         } else {
             consumer.accept(Component.translatable(
-                    this.descriptionId + ".tooltip").withStyle(ChatFormatting.GRAY));
+                    descriptionId + ".hover").withStyle(ChatFormatting.GRAY));
         }
     }
 }

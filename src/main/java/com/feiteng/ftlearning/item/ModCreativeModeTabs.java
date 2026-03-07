@@ -5,19 +5,31 @@ import com.feiteng.ftlearning.block.ModBlocks;
 // import com.feiteng.ftlearning.block.compressed.CompressedBlocks;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
 // import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
-public class ModItemGroups {
-    public static final ResourceKey<CreativeModeTab> FTL_GROUP_CORE = createKey("ftl_group_core");
-    public static final ResourceKey<CreativeModeTab> FTL_GROUP_COMPRESSED = createKey("ftl_group_compressed");
+public class ModCreativeModeTabs {
+    public static final ResourceKey<CreativeModeTab> FTL_GROUP_CORE = createKey(
+            "ftl_group_core");
+    public static final ResourceKey<CreativeModeTab> FTL_GROUP_COMPRESSED = createKey(
+            "ftl_group_compressed");
 
     private static ResourceKey<CreativeModeTab> createKey(String id) {
         return ResourceKey.create(Registries.CREATIVE_MODE_TAB,
@@ -75,6 +87,33 @@ public class ModItemGroups {
 
                             output.accept(ModItems.DISC_FRAGMENT_GENERAL);
                             output.accept(ModItems.MUSIC_DISC_IGOTSMOKE);
+
+                            display_parameters.holders().lookup(Registries.POTION)
+                                    .ifPresent(registry_lookup -> {
+                                        generateModPotionEffectTypes(output, registry_lookup,
+                                                Items.POTION, display_parameters.enabledFeatures());
+                                        generateModPotionEffectTypes(output, registry_lookup,
+                                                Items.SPLASH_POTION, display_parameters.enabledFeatures());
+                                        generateModPotionEffectTypes(output, registry_lookup,
+                                                Items.LINGERING_POTION, display_parameters.enabledFeatures());
+                                        generateModPotionEffectTypes(output, registry_lookup,
+                                                Items.TIPPED_ARROW, display_parameters.enabledFeatures());
+                                    });
+
+                            output.accept(ModItems.ARMOR_STAND_SPAWN_EGG);
+
+                            display_parameters.holders().lookup(Registries.ENCHANTMENT)
+                                    .ifPresent(registry_lookup -> {
+                                        generateModEnchantmentBookTypes(output, registry_lookup);
+                                    });
+
+                            output.accept(ModItems.SIMPLE_TUNER);
+
+                            output.accept(ModBlocks.VOIDABYSS_STONE_PILLAR);
+
+                            output.accept(ModBlocks.TUNABLE_EMITTER);
+
+                            output.accept(ModBlocks.ESSENCE_EXTRACTOR);
                         })
                         .build());
 
@@ -85,11 +124,35 @@ public class ModItemGroups {
                 FabricItemGroup.builder()
                         .title(Component.translatable("itemGroup.ftlearning.ftl_group_compressed"))
                         .icon(() -> new ItemStack(ModItems.NIGHT_VISION_GOLDEN_CARROT))
-                        // .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE, (short) 1)))
+                        // .icon(() -> new ItemStack(CompressedBlocks.getBlock(Blocks.COBBLESTONE,
+                        // (short) 1)))
                         .displayItems((display_parameters, output) -> {
                             // CompressedBlocks.registerItemGroupAll(output);
                             output.accept(ModItems.SHUODEDAOLI);
                         })
                         .build());
+    }
+
+    private static void generateModPotionEffectTypes(CreativeModeTab.Output output,
+            RegistryLookup<Potion> lookup, Item item, FeatureFlagSet feature_flag_set) {
+        lookup.listElements()
+                .filter(reference -> reference.key().identifier().getNamespace() == FTLearning.MOD_ID
+                        && reference.value().isEnabled(feature_flag_set))
+                .map(reference -> PotionContents.createItemStack(item, reference))
+                .forEach(itemStack -> output.accept(itemStack,
+                        CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
+    }
+
+    private static void generateModEnchantmentBookTypes(CreativeModeTab.Output output,
+            HolderLookup<Enchantment> holderLookup) {
+        holderLookup.listElements()
+                .filter(reference -> reference.key().identifier().getNamespace() == FTLearning.MOD_ID)
+                .forEach(reference -> {
+                    Enchantment enchantment = reference.value();
+                    for (int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); ++i) {
+                        output.accept(EnchantmentHelper.createBook(new EnchantmentInstance(reference, i)),
+                                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    }
+                });
     }
 }

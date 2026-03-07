@@ -3,8 +3,11 @@ package com.feiteng.ftlearning.item;
 import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.component.ModDataComponents;
+import com.feiteng.ftlearning.component.SimpleTunerData;
 import com.feiteng.ftlearning.item.custom.ModArmorItem;
 import com.feiteng.ftlearning.item.custom.ProspectorItem;
+import com.feiteng.ftlearning.item.custom.SimpleTunerItem;
 import com.feiteng.ftlearning.sound.ModJukeboxSongs;
 
 import net.minecraft.core.Registry;
@@ -12,6 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.DiscFragmentItem;
@@ -19,6 +23,7 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.equipment.ArmorType;
 
 public class ModItems {
@@ -119,6 +124,15 @@ public class ModItems {
     public static final Item CHROMOGENIC_LENS = register(
             "chromogenic_lens",
             Item::new, new Item.Properties());
+
+    public static final Item ARMOR_STAND_SPAWN_EGG = register(
+            "armor_stand_spawn_egg",
+            SpawnEggItem::new, new Item.Properties().spawnEgg(EntityType.ARMOR_STAND));
+
+    public static final Item SIMPLE_TUNER = register(
+            "simple_tuner",
+            SimpleTunerItem::new, new Item.Properties().stacksTo(1)
+                    .component(ModDataComponents.SIMPLE_TUNER_DATA, SimpleTunerData.DEFAULT));
 
     public static Item register(String name,
             Function<Item.Properties, Item> func, Item.Properties properties) {

@@ -356,6 +356,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.SCULK), has(Items.SCULK))
                         .save(output, HelpfulFuncs.getModNamespacedIdStr(Items.DISC_FRAGMENT_5));
 
+                // TODO: simple tuner
             }
         };
     }

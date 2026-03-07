@@ -3,7 +3,9 @@ package com.feiteng.ftlearning.block;
 import java.util.function.Function;
 
 import com.feiteng.ftlearning.FTLearning;
+import com.feiteng.ftlearning.block.custom.EssenceExtractorBlock;
 import com.feiteng.ftlearning.block.custom.TherapeuticTableBlock;
+import com.feiteng.ftlearning.block.custom.TunableEmitterBlock;
 import com.feiteng.ftlearning.sound.ModBlockSoundType;
 
 import net.minecraft.core.Registry;
@@ -20,7 +22,9 @@ import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.WallBlock;
@@ -104,6 +108,26 @@ public class ModBlocks {
             Block::new,
             BlockBehaviour.Properties.ofLegacyCopy(Blocks.DIRT)
                     .sound(ModBlockSoundType.SHUODEDAOLI_BLOCK));
+
+    public static final Block VOIDABYSS_STONE_PILLAR = register(
+            "voidabyss_stone_pillar",
+            RotatedPillarBlock::new,
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE).lightLevel(state -> 10));
+
+    public static final Block TUNABLE_EMITTER = register(
+            "tunable_emitter",
+            TunableEmitterBlock::new,
+            BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.TERRACOTTA_ORANGE)
+                    .strength(1F)
+                    .sound(SoundType.LANTERN)
+                    .lightLevel(TunableEmitterBlock.LIGHT_EMISSION));
+
+    public static final Block ESSENCE_EXTRACTOR = register(
+            "essence_extractor",
+            EssenceExtractorBlock::new,
+            BlockBehaviour.Properties.ofLegacyCopy(VOIDABYSS_STONE)
+                    .lightLevel(Blocks.litBlockEmission(13)));
 
     public static Block register(String name,
             Function<BlockBehaviour.Properties, Block> func, BlockBehaviour.Properties properties) {
