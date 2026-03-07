@@ -106,7 +106,7 @@ public class ModZhCnLangProvider extends FabricLanguageProvider {
 
         builder.add(ModMobEffects.FURY.value(), "疾攻");
 
-        HelpfulFuncs.translatePotion(builder, language_code, "疾攻", ModPotions.FURY);
+        HelpfulFuncs.translatePotionItem(builder, language_code, "疾攻", ModPotions.FURY);
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "盔甲架刷怪蛋");
 

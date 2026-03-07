@@ -22,27 +22,29 @@ public class HelpfulFuncs {
     public static final String HOVER_MASK1_KEY = "item.ftlearning.hover_mask1";
     public static final String HOVER_MASK2_KEY = "item.ftlearning.hover_mask2";
 
-    public static final Map<String, Map<Item, String>> POTION_TRANSLATIONS = Util.make(
+    public static final Map<String, Map<Item, String>> POTION_TRANSLATION_MAP = Util.make(
             new HashMap<>(), map -> {
                 map.put("en_us", Util.make(new HashMap<>(), m -> {
                     m.put(Items.POTION, "Potion of %s");
                     m.put(Items.SPLASH_POTION, "Splash Potion of %s");
                     m.put(Items.LINGERING_POTION, "Lingering Potion of %s");
+                    m.put(Items.TIPPED_ARROW, "Arrow of %s");
                 }));
                 map.put("zh_cn", Util.make(new HashMap<>(), m -> {
                     m.put(Items.POTION, "%s药水");
                     m.put(Items.SPLASH_POTION, "喷溅型%s药水");
                     m.put(Items.LINGERING_POTION, "滞留型%s药水");
+                    m.put(Items.TIPPED_ARROW, "%s之箭");
                 }));
             });
 
-    public static void translatePotion(TranslationBuilder builder, String lang,
+    public static void translatePotionItem(TranslationBuilder builder, String lang,
             String translation, Holder<Potion> holder) { // FIXME: IGNORE unsafe vararg ?
-        POTION_TRANSLATIONS.get(lang).forEach((potion_item, format) -> builder.add(
-                getPotionTranslationKey(potion_item, holder), String.format(format, translation)));
+        POTION_TRANSLATION_MAP.get(lang).forEach((potion_item, format) -> builder.add(
+                getPotionItemTranslationKey(potion_item, holder), String.format(format, translation)));
     }
 
-    private static String getPotionTranslationKey(Item potion_item, Holder<Potion> potion_holder) {
+    private static String getPotionItemTranslationKey(Item potion_item, Holder<Potion> potion_holder) {
         return potion_item.getDescriptionId() + ".effect." + potion_holder.value().name();
     }
 

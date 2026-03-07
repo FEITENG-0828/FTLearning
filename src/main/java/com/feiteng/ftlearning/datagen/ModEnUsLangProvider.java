@@ -107,7 +107,7 @@ public class ModEnUsLangProvider extends FabricLanguageProvider {
 
         builder.add(ModMobEffects.FURY.value(), "Fury");
 
-        HelpfulFuncs.translatePotion(builder, language_code, "Fury", ModPotions.FURY);
+        HelpfulFuncs.translatePotionItem(builder, language_code, "Fury", ModPotions.FURY);
 
         builder.add(ModItems.ARMOR_STAND_SPAWN_EGG, "Armor Stand Spawn Egg");
 

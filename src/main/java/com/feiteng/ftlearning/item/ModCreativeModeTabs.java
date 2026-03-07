@@ -96,6 +96,8 @@ public class ModCreativeModeTabs {
                                                 Items.SPLASH_POTION, display_parameters.enabledFeatures());
                                         generateModPotionEffectTypes(output, registry_lookup,
                                                 Items.LINGERING_POTION, display_parameters.enabledFeatures());
+                                        generateModPotionEffectTypes(output, registry_lookup,
+                                                Items.TIPPED_ARROW, display_parameters.enabledFeatures());
                                     });
 
                             output.accept(ModItems.ARMOR_STAND_SPAWN_EGG);
